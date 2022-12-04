@@ -41,9 +41,9 @@ fn part_1(input: &str) -> u32 {
         .iter()
         .filter(|&&pair| !pair.eq(""))
         .map(|pair| {
-            let mut split: Vec<&str> = pair.split(",").collect();
-            let first = RangeStruct::from_str(split.pop().unwrap()).unwrap();
-            let second = RangeStruct::from_str(split.pop().unwrap()).unwrap();
+            let split: Vec<&str> = pair.split(",").collect();
+            let first = RangeStruct::from_str(split[0]).unwrap();
+            let second = RangeStruct::from_str(split[1]).unwrap();
             if (first.right >= second.right && first.left <= second.left) {
                 return 1;
             } else if (second.right >= first.right && second.left <= first.left) {
