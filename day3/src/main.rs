@@ -1,6 +1,6 @@
 use itertools::Itertools;
-use std::{fs, str::FromStr};
 use std::time::Instant;
+use std::{fs, str::FromStr};
 
 fn main() {
     println!("Hello, world!");
@@ -43,7 +43,7 @@ fn part_2() {
             sack2,
             sack3,
         });
-//    println!("groups: {:?}", groups);
+    //    println!("groups: {:?}", groups);
     let total_sum: u32 = groups
         .into_iter()
         .map(|group| group.find_shared_item().expect("Cannot Find shared item!"))
