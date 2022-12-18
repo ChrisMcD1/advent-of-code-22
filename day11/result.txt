@@ -1,0 +1,1235 @@
+Hello, world!
+Got monkeys of [RefCell { value: Monkey { items: [79, 98], operation: Multiply(Num(19)), test: Test { divisible_by: 23, true_monkey: 2, false_monkey: 3 }, inspected_items: 0 } }, RefCell { value: Monkey { items: [54, 65, 75, 74], operation: Add(Num(6)), test: Test { divisible_by: 19, true_monkey: 2, false_monkey: 0 }, inspected_items: 0 } }, RefCell { value: Monkey { items: [79, 60, 97], operation: Multiply(Old), test: Test { divisible_by: 13, true_monkey: 1, false_monkey: 3 }, inspected_items: 0 } }, RefCell { value: Monkey { items: [74], operation: Add(Num(3)), test: Test { divisible_by: 17, true_monkey: 0, false_monkey: 1 }, inspected_items: 0 } }]
+Monkey Inspects an item with a worry level of 79
+Worry level is increased to 1501
+New stress is 500
+Item of stress 500 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 98
+Worry level is increased to 1862
+New stress is 620
+Item of stress 620 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 54
+Worry level is increased to 60
+New stress is 20
+Item of stress 20 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 65
+Worry level is increased to 71
+New stress is 23
+Item of stress 23 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 75
+Worry level is increased to 81
+New stress is 27
+Item of stress 27 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 74
+Worry level is increased to 80
+New stress is 26
+Item of stress 26 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 79
+Worry level is increased to 6241
+New stress is 2080
+Item of stress 2080 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 60
+Worry level is increased to 3600
+New stress is 1200
+Item of stress 1200 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 97
+Worry level is increased to 9409
+New stress is 3136
+Item of stress 3136 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 74
+Worry level is increased to 77
+New stress is 25
+Item of stress 25 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 500
+Worry level is increased to 503
+New stress is 167
+Item of stress 167 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 620
+Worry level is increased to 623
+New stress is 207
+Item of stress 207 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 1200
+Worry level is increased to 1203
+New stress is 401
+Item of stress 401 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 3136
+Worry level is increased to 3139
+New stress is 1046
+Item of stress 1046 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 20
+Worry level is increased to 380
+New stress is 126
+Item of stress 126 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 23
+Worry level is increased to 437
+New stress is 145
+Item of stress 145 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 27
+Worry level is increased to 513
+New stress is 171
+Item of stress 171 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 26
+Worry level is increased to 494
+New stress is 164
+Item of stress 164 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 2080
+Worry level is increased to 2086
+New stress is 695
+Item of stress 695 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 25
+Worry level is increased to 31
+New stress is 10
+Item of stress 10 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 167
+Worry level is increased to 173
+New stress is 57
+Item of stress 57 is being passed to monkey 2
+Monkey Inspects an item with a worry level of 207
+Worry level is increased to 213
+New stress is 71
+Item of stress 71 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 401
+Worry level is increased to 407
+New stress is 135
+Item of stress 135 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 1046
+Worry level is increased to 1052
+New stress is 350
+Item of stress 350 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 57
+Worry level is increased to 3249
+New stress is 1083
+Item of stress 1083 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 126
+Worry level is increased to 129
+New stress is 43
+Item of stress 43 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 145
+Worry level is increased to 148
+New stress is 49
+Item of stress 49 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 171
+Worry level is increased to 174
+New stress is 58
+Item of stress 58 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 164
+Worry level is increased to 167
+New stress is 55
+Item of stress 55 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 1083
+Worry level is increased to 1086
+New stress is 362
+Item of stress 362 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 695
+Worry level is increased to 13205
+New stress is 4401
+Item of stress 4401 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 10
+Worry level is increased to 190
+New stress is 63
+Item of stress 63 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 71
+Worry level is increased to 1349
+New stress is 449
+Item of stress 449 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 135
+Worry level is increased to 2565
+New stress is 855
+Item of stress 855 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 350
+Worry level is increased to 6650
+New stress is 2216
+Item of stress 2216 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 43
+Worry level is increased to 49
+New stress is 16
+Item of stress 16 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 49
+Worry level is increased to 55
+New stress is 18
+Item of stress 18 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 58
+Worry level is increased to 64
+New stress is 21
+Item of stress 21 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 55
+Worry level is increased to 61
+New stress is 20
+Item of stress 20 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 362
+Worry level is increased to 368
+New stress is 122
+Item of stress 122 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 4401
+Worry level is increased to 4404
+New stress is 1468
+Item of stress 1468 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 63
+Worry level is increased to 66
+New stress is 22
+Item of stress 22 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 449
+Worry level is increased to 452
+New stress is 150
+Item of stress 150 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 855
+Worry level is increased to 858
+New stress is 286
+Item of stress 286 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 2216
+Worry level is increased to 2219
+New stress is 739
+Item of stress 739 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 16
+Worry level is increased to 304
+New stress is 101
+Item of stress 101 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 18
+Worry level is increased to 342
+New stress is 114
+Item of stress 114 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 21
+Worry level is increased to 399
+New stress is 133
+Item of stress 133 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 20
+Worry level is increased to 380
+New stress is 126
+Item of stress 126 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 122
+Worry level is increased to 2318
+New stress is 772
+Item of stress 772 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 1468
+Worry level is increased to 1474
+New stress is 491
+Item of stress 491 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 22
+Worry level is increased to 28
+New stress is 9
+Item of stress 9 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 150
+Worry level is increased to 156
+New stress is 52
+Item of stress 52 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 286
+Worry level is increased to 292
+New stress is 97
+Item of stress 97 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 739
+Worry level is increased to 745
+New stress is 248
+Item of stress 248 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 101
+Worry level is increased to 104
+New stress is 34
+Item of stress 34 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 114
+Worry level is increased to 117
+New stress is 39
+Item of stress 39 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 133
+Worry level is increased to 136
+New stress is 45
+Item of stress 45 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 126
+Worry level is increased to 129
+New stress is 43
+Item of stress 43 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 772
+Worry level is increased to 775
+New stress is 258
+Item of stress 258 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 491
+Worry level is increased to 9329
+New stress is 3109
+Item of stress 3109 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 9
+Worry level is increased to 171
+New stress is 57
+Item of stress 57 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 52
+Worry level is increased to 988
+New stress is 329
+Item of stress 329 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 97
+Worry level is increased to 1843
+New stress is 614
+Item of stress 614 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 248
+Worry level is increased to 4712
+New stress is 1570
+Item of stress 1570 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 34
+Worry level is increased to 646
+New stress is 215
+Item of stress 215 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 39
+Worry level is increased to 45
+New stress is 15
+Item of stress 15 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 45
+Worry level is increased to 51
+New stress is 17
+Item of stress 17 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 43
+Worry level is increased to 49
+New stress is 16
+Item of stress 16 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 258
+Worry level is increased to 264
+New stress is 88
+Item of stress 88 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 3109
+Worry level is increased to 3112
+New stress is 1037
+Item of stress 1037 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 57
+Worry level is increased to 60
+New stress is 20
+Item of stress 20 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 329
+Worry level is increased to 332
+New stress is 110
+Item of stress 110 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 614
+Worry level is increased to 617
+New stress is 205
+Item of stress 205 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 1570
+Worry level is increased to 1573
+New stress is 524
+Item of stress 524 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 215
+Worry level is increased to 218
+New stress is 72
+Item of stress 72 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 15
+Worry level is increased to 285
+New stress is 95
+Item of stress 95 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 17
+Worry level is increased to 323
+New stress is 107
+Item of stress 107 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 16
+Worry level is increased to 304
+New stress is 101
+Item of stress 101 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 88
+Worry level is increased to 1672
+New stress is 557
+Item of stress 557 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 1037
+Worry level is increased to 19703
+New stress is 6567
+Item of stress 6567 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 20
+Worry level is increased to 26
+New stress is 8
+Item of stress 8 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 110
+Worry level is increased to 116
+New stress is 38
+Item of stress 38 is being passed to monkey 2
+Monkey Inspects an item with a worry level of 205
+Worry level is increased to 211
+New stress is 70
+Item of stress 70 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 524
+Worry level is increased to 530
+New stress is 176
+Item of stress 176 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 72
+Worry level is increased to 78
+New stress is 26
+Item of stress 26 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 38
+Worry level is increased to 1444
+New stress is 481
+Item of stress 481 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 95
+Worry level is increased to 98
+New stress is 32
+Item of stress 32 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 107
+Worry level is increased to 110
+New stress is 36
+Item of stress 36 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 101
+Worry level is increased to 104
+New stress is 34
+Item of stress 34 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 557
+Worry level is increased to 560
+New stress is 186
+Item of stress 186 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 6567
+Worry level is increased to 6570
+New stress is 2190
+Item of stress 2190 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 8
+Worry level is increased to 152
+New stress is 50
+Item of stress 50 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 70
+Worry level is increased to 1330
+New stress is 443
+Item of stress 443 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 176
+Worry level is increased to 3344
+New stress is 1114
+Item of stress 1114 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 26
+Worry level is increased to 494
+New stress is 164
+Item of stress 164 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 34
+Worry level is increased to 646
+New stress is 215
+Item of stress 215 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 481
+Worry level is increased to 487
+New stress is 162
+Item of stress 162 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 32
+Worry level is increased to 38
+New stress is 12
+Item of stress 12 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 36
+Worry level is increased to 42
+New stress is 14
+Item of stress 14 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 186
+Worry level is increased to 192
+New stress is 64
+Item of stress 64 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 2190
+Worry level is increased to 2196
+New stress is 732
+Item of stress 732 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 50
+Worry level is increased to 53
+New stress is 17
+Item of stress 17 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 443
+Worry level is increased to 446
+New stress is 148
+Item of stress 148 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 1114
+Worry level is increased to 1117
+New stress is 372
+Item of stress 372 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 164
+Worry level is increased to 167
+New stress is 55
+Item of stress 55 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 215
+Worry level is increased to 218
+New stress is 72
+Item of stress 72 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 162
+Worry level is increased to 3078
+New stress is 1026
+Item of stress 1026 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 12
+Worry level is increased to 228
+New stress is 76
+Item of stress 76 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 14
+Worry level is increased to 266
+New stress is 88
+Item of stress 88 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 64
+Worry level is increased to 1216
+New stress is 405
+Item of stress 405 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 732
+Worry level is increased to 13908
+New stress is 4636
+Item of stress 4636 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 17
+Worry level is increased to 323
+New stress is 107
+Item of stress 107 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 148
+Worry level is increased to 154
+New stress is 51
+Item of stress 51 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 372
+Worry level is increased to 378
+New stress is 126
+Item of stress 126 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 55
+Worry level is increased to 61
+New stress is 20
+Item of stress 20 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 72
+Worry level is increased to 78
+New stress is 26
+Item of stress 26 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 1026
+Worry level is increased to 1029
+New stress is 343
+Item of stress 343 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 76
+Worry level is increased to 79
+New stress is 26
+Item of stress 26 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 88
+Worry level is increased to 91
+New stress is 30
+Item of stress 30 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 405
+Worry level is increased to 408
+New stress is 136
+Item of stress 136 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 4636
+Worry level is increased to 4639
+New stress is 1546
+Item of stress 1546 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 107
+Worry level is increased to 110
+New stress is 36
+Item of stress 36 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 51
+Worry level is increased to 969
+New stress is 323
+Item of stress 323 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 126
+Worry level is increased to 2394
+New stress is 798
+Item of stress 798 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 20
+Worry level is increased to 380
+New stress is 126
+Item of stress 126 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 26
+Worry level is increased to 494
+New stress is 164
+Item of stress 164 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 136
+Worry level is increased to 2584
+New stress is 861
+Item of stress 861 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 343
+Worry level is increased to 349
+New stress is 116
+Item of stress 116 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 26
+Worry level is increased to 32
+New stress is 10
+Item of stress 10 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 30
+Worry level is increased to 36
+New stress is 12
+Item of stress 12 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 1546
+Worry level is increased to 1552
+New stress is 517
+Item of stress 517 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 36
+Worry level is increased to 42
+New stress is 14
+Item of stress 14 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 323
+Worry level is increased to 326
+New stress is 108
+Item of stress 108 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 798
+Worry level is increased to 801
+New stress is 267
+Item of stress 267 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 126
+Worry level is increased to 129
+New stress is 43
+Item of stress 43 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 164
+Worry level is increased to 167
+New stress is 55
+Item of stress 55 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 861
+Worry level is increased to 864
+New stress is 288
+Item of stress 288 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 116
+Worry level is increased to 2204
+New stress is 734
+Item of stress 734 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 10
+Worry level is increased to 190
+New stress is 63
+Item of stress 63 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 12
+Worry level is increased to 228
+New stress is 76
+Item of stress 76 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 517
+Worry level is increased to 9823
+New stress is 3274
+Item of stress 3274 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 14
+Worry level is increased to 266
+New stress is 88
+Item of stress 88 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 108
+Worry level is increased to 114
+New stress is 38
+Item of stress 38 is being passed to monkey 2
+Monkey Inspects an item with a worry level of 267
+Worry level is increased to 273
+New stress is 91
+Item of stress 91 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 43
+Worry level is increased to 49
+New stress is 16
+Item of stress 16 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 55
+Worry level is increased to 61
+New stress is 20
+Item of stress 20 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 288
+Worry level is increased to 294
+New stress is 98
+Item of stress 98 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 38
+Worry level is increased to 1444
+New stress is 481
+Item of stress 481 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 734
+Worry level is increased to 737
+New stress is 245
+Item of stress 245 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 63
+Worry level is increased to 66
+New stress is 22
+Item of stress 22 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 76
+Worry level is increased to 79
+New stress is 26
+Item of stress 26 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 3274
+Worry level is increased to 3277
+New stress is 1092
+Item of stress 1092 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 88
+Worry level is increased to 91
+New stress is 30
+Item of stress 30 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 91
+Worry level is increased to 1729
+New stress is 576
+Item of stress 576 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 16
+Worry level is increased to 304
+New stress is 101
+Item of stress 101 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 20
+Worry level is increased to 380
+New stress is 126
+Item of stress 126 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 98
+Worry level is increased to 1862
+New stress is 620
+Item of stress 620 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 481
+Worry level is increased to 487
+New stress is 162
+Item of stress 162 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 245
+Worry level is increased to 251
+New stress is 83
+Item of stress 83 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 22
+Worry level is increased to 28
+New stress is 9
+Item of stress 9 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 26
+Worry level is increased to 32
+New stress is 10
+Item of stress 10 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 1092
+Worry level is increased to 1098
+New stress is 366
+Item of stress 366 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 30
+Worry level is increased to 36
+New stress is 12
+Item of stress 12 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 576
+Worry level is increased to 579
+New stress is 193
+Item of stress 193 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 101
+Worry level is increased to 104
+New stress is 34
+Item of stress 34 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 126
+Worry level is increased to 129
+New stress is 43
+Item of stress 43 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 620
+Worry level is increased to 623
+New stress is 207
+Item of stress 207 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 162
+Worry level is increased to 3078
+New stress is 1026
+Item of stress 1026 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 83
+Worry level is increased to 1577
+New stress is 525
+Item of stress 525 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 9
+Worry level is increased to 171
+New stress is 57
+Item of stress 57 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 10
+Worry level is increased to 190
+New stress is 63
+Item of stress 63 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 366
+Worry level is increased to 6954
+New stress is 2318
+Item of stress 2318 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 12
+Worry level is increased to 228
+New stress is 76
+Item of stress 76 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 34
+Worry level is increased to 646
+New stress is 215
+Item of stress 215 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 193
+Worry level is increased to 199
+New stress is 66
+Item of stress 66 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 43
+Worry level is increased to 49
+New stress is 16
+Item of stress 16 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 207
+Worry level is increased to 213
+New stress is 71
+Item of stress 71 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 1026
+Worry level is increased to 1029
+New stress is 343
+Item of stress 343 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 525
+Worry level is increased to 528
+New stress is 176
+Item of stress 176 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 57
+Worry level is increased to 60
+New stress is 20
+Item of stress 20 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 63
+Worry level is increased to 66
+New stress is 22
+Item of stress 22 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 2318
+Worry level is increased to 2321
+New stress is 773
+Item of stress 773 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 76
+Worry level is increased to 79
+New stress is 26
+Item of stress 26 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 215
+Worry level is increased to 218
+New stress is 72
+Item of stress 72 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 66
+Worry level is increased to 1254
+New stress is 418
+Item of stress 418 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 16
+Worry level is increased to 304
+New stress is 101
+Item of stress 101 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 71
+Worry level is increased to 1349
+New stress is 449
+Item of stress 449 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 343
+Worry level is increased to 349
+New stress is 116
+Item of stress 116 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 176
+Worry level is increased to 182
+New stress is 60
+Item of stress 60 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 20
+Worry level is increased to 26
+New stress is 8
+Item of stress 8 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 22
+Worry level is increased to 28
+New stress is 9
+Item of stress 9 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 773
+Worry level is increased to 779
+New stress is 259
+Item of stress 259 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 26
+Worry level is increased to 32
+New stress is 10
+Item of stress 10 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 72
+Worry level is increased to 78
+New stress is 26
+Item of stress 26 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 418
+Worry level is increased to 421
+New stress is 140
+Item of stress 140 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 101
+Worry level is increased to 104
+New stress is 34
+Item of stress 34 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 449
+Worry level is increased to 452
+New stress is 150
+Item of stress 150 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 116
+Worry level is increased to 2204
+New stress is 734
+Item of stress 734 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 60
+Worry level is increased to 1140
+New stress is 380
+Item of stress 380 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 8
+Worry level is increased to 152
+New stress is 50
+Item of stress 50 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 9
+Worry level is increased to 171
+New stress is 57
+Item of stress 57 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 259
+Worry level is increased to 4921
+New stress is 1640
+Item of stress 1640 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 10
+Worry level is increased to 190
+New stress is 63
+Item of stress 63 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 26
+Worry level is increased to 494
+New stress is 164
+Item of stress 164 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 34
+Worry level is increased to 646
+New stress is 215
+Item of stress 215 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 140
+Worry level is increased to 146
+New stress is 48
+Item of stress 48 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 150
+Worry level is increased to 156
+New stress is 52
+Item of stress 52 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 734
+Worry level is increased to 737
+New stress is 245
+Item of stress 245 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 380
+Worry level is increased to 383
+New stress is 127
+Item of stress 127 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 50
+Worry level is increased to 53
+New stress is 17
+Item of stress 17 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 57
+Worry level is increased to 60
+New stress is 20
+Item of stress 20 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 1640
+Worry level is increased to 1643
+New stress is 547
+Item of stress 547 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 63
+Worry level is increased to 66
+New stress is 22
+Item of stress 22 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 164
+Worry level is increased to 167
+New stress is 55
+Item of stress 55 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 215
+Worry level is increased to 218
+New stress is 72
+Item of stress 72 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 48
+Worry level is increased to 912
+New stress is 304
+Item of stress 304 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 52
+Worry level is increased to 988
+New stress is 329
+Item of stress 329 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 17
+Worry level is increased to 323
+New stress is 107
+Item of stress 107 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 245
+Worry level is increased to 251
+New stress is 83
+Item of stress 83 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 127
+Worry level is increased to 133
+New stress is 44
+Item of stress 44 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 20
+Worry level is increased to 26
+New stress is 8
+Item of stress 8 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 547
+Worry level is increased to 553
+New stress is 184
+Item of stress 184 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 22
+Worry level is increased to 28
+New stress is 9
+Item of stress 9 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 55
+Worry level is increased to 61
+New stress is 20
+Item of stress 20 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 72
+Worry level is increased to 78
+New stress is 26
+Item of stress 26 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 304
+Worry level is increased to 307
+New stress is 102
+Item of stress 102 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 329
+Worry level is increased to 332
+New stress is 110
+Item of stress 110 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 107
+Worry level is increased to 110
+New stress is 36
+Item of stress 36 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 83
+Worry level is increased to 1577
+New stress is 525
+Item of stress 525 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 44
+Worry level is increased to 836
+New stress is 278
+Item of stress 278 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 8
+Worry level is increased to 152
+New stress is 50
+Item of stress 50 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 184
+Worry level is increased to 3496
+New stress is 1165
+Item of stress 1165 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 9
+Worry level is increased to 171
+New stress is 57
+Item of stress 57 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 20
+Worry level is increased to 380
+New stress is 126
+Item of stress 126 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 26
+Worry level is increased to 494
+New stress is 164
+Item of stress 164 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 102
+Worry level is increased to 1938
+New stress is 646
+Item of stress 646 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 110
+Worry level is increased to 116
+New stress is 38
+Item of stress 38 is being passed to monkey 2
+Monkey Inspects an item with a worry level of 36
+Worry level is increased to 42
+New stress is 14
+Item of stress 14 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 38
+Worry level is increased to 1444
+New stress is 481
+Item of stress 481 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 525
+Worry level is increased to 528
+New stress is 176
+Item of stress 176 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 278
+Worry level is increased to 281
+New stress is 93
+Item of stress 93 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 50
+Worry level is increased to 53
+New stress is 17
+Item of stress 17 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 1165
+Worry level is increased to 1168
+New stress is 389
+Item of stress 389 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 57
+Worry level is increased to 60
+New stress is 20
+Item of stress 20 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 126
+Worry level is increased to 129
+New stress is 43
+Item of stress 43 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 164
+Worry level is increased to 167
+New stress is 55
+Item of stress 55 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 646
+Worry level is increased to 649
+New stress is 216
+Item of stress 216 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 14
+Worry level is increased to 266
+New stress is 88
+Item of stress 88 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 17
+Worry level is increased to 323
+New stress is 107
+Item of stress 107 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 481
+Worry level is increased to 487
+New stress is 162
+Item of stress 162 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 176
+Worry level is increased to 182
+New stress is 60
+Item of stress 60 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 93
+Worry level is increased to 99
+New stress is 33
+Item of stress 33 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 389
+Worry level is increased to 395
+New stress is 131
+Item of stress 131 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 20
+Worry level is increased to 26
+New stress is 8
+Item of stress 8 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 43
+Worry level is increased to 49
+New stress is 16
+Item of stress 16 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 55
+Worry level is increased to 61
+New stress is 20
+Item of stress 20 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 216
+Worry level is increased to 222
+New stress is 74
+Item of stress 74 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 88
+Worry level is increased to 91
+New stress is 30
+Item of stress 30 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 107
+Worry level is increased to 110
+New stress is 36
+Item of stress 36 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 162
+Worry level is increased to 3078
+New stress is 1026
+Item of stress 1026 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 60
+Worry level is increased to 1140
+New stress is 380
+Item of stress 380 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 33
+Worry level is increased to 627
+New stress is 209
+Item of stress 209 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 131
+Worry level is increased to 2489
+New stress is 829
+Item of stress 829 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 8
+Worry level is increased to 152
+New stress is 50
+Item of stress 50 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 16
+Worry level is increased to 304
+New stress is 101
+Item of stress 101 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 20
+Worry level is increased to 380
+New stress is 126
+Item of stress 126 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 74
+Worry level is increased to 1406
+New stress is 468
+Item of stress 468 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 30
+Worry level is increased to 36
+New stress is 12
+Item of stress 12 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 36
+Worry level is increased to 42
+New stress is 14
+Item of stress 14 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 1026
+Worry level is increased to 1029
+New stress is 343
+Item of stress 343 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 380
+Worry level is increased to 383
+New stress is 127
+Item of stress 127 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 209
+Worry level is increased to 212
+New stress is 70
+Item of stress 70 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 829
+Worry level is increased to 832
+New stress is 277
+Item of stress 277 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 50
+Worry level is increased to 53
+New stress is 17
+Item of stress 17 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 101
+Worry level is increased to 104
+New stress is 34
+Item of stress 34 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 126
+Worry level is increased to 129
+New stress is 43
+Item of stress 43 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 468
+Worry level is increased to 471
+New stress is 157
+Item of stress 157 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 12
+Worry level is increased to 228
+New stress is 76
+Item of stress 76 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 14
+Worry level is increased to 266
+New stress is 88
+Item of stress 88 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 17
+Worry level is increased to 323
+New stress is 107
+Item of stress 107 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 34
+Worry level is increased to 646
+New stress is 215
+Item of stress 215 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 343
+Worry level is increased to 349
+New stress is 116
+Item of stress 116 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 127
+Worry level is increased to 133
+New stress is 44
+Item of stress 44 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 70
+Worry level is increased to 76
+New stress is 25
+Item of stress 25 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 277
+Worry level is increased to 283
+New stress is 94
+Item of stress 94 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 43
+Worry level is increased to 49
+New stress is 16
+Item of stress 16 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 157
+Worry level is increased to 163
+New stress is 54
+Item of stress 54 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 76
+Worry level is increased to 79
+New stress is 26
+Item of stress 26 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 88
+Worry level is increased to 91
+New stress is 30
+Item of stress 30 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 107
+Worry level is increased to 110
+New stress is 36
+Item of stress 36 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 215
+Worry level is increased to 218
+New stress is 72
+Item of stress 72 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 116
+Worry level is increased to 2204
+New stress is 734
+Item of stress 734 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 44
+Worry level is increased to 836
+New stress is 278
+Item of stress 278 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 25
+Worry level is increased to 475
+New stress is 158
+Item of stress 158 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 94
+Worry level is increased to 1786
+New stress is 595
+Item of stress 595 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 16
+Worry level is increased to 304
+New stress is 101
+Item of stress 101 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 54
+Worry level is increased to 1026
+New stress is 342
+Item of stress 342 is being passed to monkey 3
+Monkey Inspects an item with a worry level of 26
+Worry level is increased to 32
+New stress is 10
+Item of stress 10 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 30
+Worry level is increased to 36
+New stress is 12
+Item of stress 12 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 36
+Worry level is increased to 42
+New stress is 14
+Item of stress 14 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 72
+Worry level is increased to 78
+New stress is 26
+Item of stress 26 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 734
+Worry level is increased to 737
+New stress is 245
+Item of stress 245 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 278
+Worry level is increased to 281
+New stress is 93
+Item of stress 93 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 158
+Worry level is increased to 161
+New stress is 53
+Item of stress 53 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 595
+Worry level is increased to 598
+New stress is 199
+Item of stress 199 is being passed to monkey 1
+Monkey Inspects an item with a worry level of 101
+Worry level is increased to 104
+New stress is 34
+Item of stress 34 is being passed to monkey 0
+Monkey Inspects an item with a worry level of 342
+Worry level is increased to 345
+New stress is 115
+Item of stress 115 is being passed to monkey 1
+Result: 10605
