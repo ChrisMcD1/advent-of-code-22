@@ -35,15 +35,18 @@ impl MathEquation {
             operator,
         };
     }
-    fn get_value(&self, all_monkeys: &HashMap<String, Monkey>) -> i64 {
-        let left_value = all_monkeys.get(&self.left).unwrap().get_value(all_monkeys);
-        let right_value = all_monkeys.get(&self.right).unwrap().get_value(all_monkeys);
+    fn calculate_operator(&self, left_value: i64, right_value: i64) -> i64 {
         return match self.operator {
             Operator::Add => left_value + right_value,
             Operator::Subtract => left_value - right_value,
             Operator::Multiply => left_value * right_value,
             Operator::Divide => left_value / right_value,
         };
+    }
+    fn get_value(&self, all_monkeys: &HashMap<String, Monkey>) -> i64 {
+        let left_value = all_monkeys.get(&self.left).unwrap().get_value(all_monkeys);
+        let right_value = all_monkeys.get(&self.right).unwrap().get_value(all_monkeys);
+        return self.calculate_operator(left_value, right_value);
     }
     fn get_optional_value(&self, all_monkeys: &HashMap<String, Monkey>) -> Option<i64> {
         let left_value = all_monkeys
@@ -54,12 +57,7 @@ impl MathEquation {
             .get(&self.right)
             .unwrap()
             .get_optional_value(all_monkeys)?;
-        return Some(match self.operator {
-            Operator::Subtract => left_value - right_value,
-            Operator::Add => left_value + right_value,
-            Operator::Multiply => left_value * right_value,
-            Operator::Divide => left_value / right_value,
-        });
+        return Some(self.calculate_operator(left_value, right_value));
     }
     fn find_value_to_make_equal(
         &self,
@@ -173,37 +171,18 @@ impl FromStr for MonkeyAlgorithm {
             let left_monkey = words[0];
             let operation = words[1];
             let right_monkey = words[2];
-            match operation {
-                "+" => {
-                    return Ok(MonkeyAlgorithm::Equation(MathEquation::new(
-                        left_monkey.to_string(),
-                        right_monkey.to_string(),
-                        Operator::Add,
-                    )))
-                }
-                "-" => {
-                    return Ok(MonkeyAlgorithm::Equation(MathEquation::new(
-                        left_monkey.to_string(),
-                        right_monkey.to_string(),
-                        Operator::Subtract,
-                    )))
-                }
-                "*" => {
-                    return Ok(MonkeyAlgorithm::Equation(MathEquation::new(
-                        left_monkey.to_string(),
-                        right_monkey.to_string(),
-                        Operator::Multiply,
-                    )))
-                }
-                "/" => {
-                    return Ok(MonkeyAlgorithm::Equation(MathEquation::new(
-                        left_monkey.to_string(),
-                        right_monkey.to_string(),
-                        Operator::Divide,
-                    )))
-                }
+            let operator = match operation {
+                "+" => Operator::Add,
+                "-" => Operator::Subtract,
+                "/" => Operator::Divide,
+                "*" => Operator::Multiply,
                 _ => unreachable!(),
-            }
+            };
+            return Ok(MonkeyAlgorithm::Equation(MathEquation::new(
+                left_monkey.to_string(),
+                right_monkey.to_string(),
+                operator,
+            )));
         } else {
             unreachable!()
         }
