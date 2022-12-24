@@ -16,7 +16,6 @@ enum MonkeyAlgorithm {
     Divide(String, String),
     Subtract(String, String),
     Constant(i64),
-    Equal(String, String),
 }
 
 #[derive(Debug, PartialEq, Hash, Eq, Clone)]
@@ -30,16 +29,6 @@ impl FromStr for Monkey {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let (name, algorithm) = s.split_once(":").unwrap();
-        if name == "root" {
-            let (left, right) = algorithm.split_once("+").unwrap();
-            return Ok(Monkey {
-                name: name.to_string(),
-                algorithm: MonkeyAlgorithm::Equal(
-                    left.trim().to_string(),
-                    right.trim().to_string(),
-                ),
-            });
-        }
         return Ok(Monkey {
             name: name.to_string(),
             algorithm: algorithm.parse().unwrap(),
@@ -67,7 +56,6 @@ impl Monkey {
                 all_monkeys.get(left).unwrap().get_value(all_monkeys)
                     - all_monkeys.get(right).unwrap().get_value(all_monkeys)
             }
-            MonkeyAlgorithm::Equal(_, _) => unreachable!(),
         };
     }
     fn get_optional_value(&self, all_monkeys: &HashMap<String, Monkey>) -> Option<i64> {
@@ -120,7 +108,6 @@ impl Monkey {
                     .get_optional_value(all_monkeys)?;
                 Some(left_monkey_value / right_monkey_value)
             }
-            MonkeyAlgorithm::Equal(_, _) => unreachable!(),
         };
     }
     fn find_value_to_make_equal(
@@ -236,7 +223,6 @@ impl Monkey {
                     unreachable!()
                 }
             }
-            MonkeyAlgorithm::Equal(_, _) => unreachable!(),
             MonkeyAlgorithm::Constant(val) => *val,
         }
     }
@@ -315,7 +301,7 @@ fn part_2(input: &str) -> i64 {
         .find(|&elem| elem.1.name == "root".to_string())
         .unwrap()
         .1;
-    if let MonkeyAlgorithm::Equal(left, right) = &root_monkey.algorithm {
+    if let MonkeyAlgorithm::Add(left, right) = &root_monkey.algorithm {
         let left_monkey = monkeys.get(left).unwrap();
         let right_monkey = monkeys.get(right).unwrap();
         let left_monkey_value = left_monkey.get_optional_value(&monkeys);
@@ -338,6 +324,14 @@ fn part_2(input: &str) -> i64 {
 mod test {
     use crate::*;
 
+    #[test]
+    fn part_1_given() {
+        let input = include_str!("../input.dev");
+
+        let output = part_1(input);
+
+        assert_eq!(output, 152);
+    }
     #[test]
     fn part_2_given() {
         let input = include_str!("../input.dev");
@@ -376,6 +370,76 @@ mod test {
         let equal_value = root.find_value_to_make_equal(100, &all_monkeys);
 
         assert_eq!(equal_value, 90);
+    }
+
+    #[test]
+    fn subtract() {
+        let left = get_human();
+        let right = Monkey {
+            name: "aaaa".to_string(),
+            algorithm: MonkeyAlgorithm::Constant(10),
+        };
+        let root = Monkey {
+            name: "root".to_string(),
+            algorithm: MonkeyAlgorithm::Subtract("humn".to_string(), "aaaa".to_string()),
+        };
+        let all_monkeys: HashMap<String, Monkey> = vec![
+            (left.name.clone(), left),
+            (right.name.clone(), right),
+            (root.name.clone(), root.clone()),
+        ]
+        .into_iter()
+        .collect();
+
+        let equal_value = root.find_value_to_make_equal(100, &all_monkeys);
+
+        assert_eq!(equal_value, 110);
+    }
+    #[test]
+    fn multiply_equal() {
+        let left = get_human();
+        let right = Monkey {
+            name: "aaaa".to_string(),
+            algorithm: MonkeyAlgorithm::Constant(10),
+        };
+        let root = Monkey {
+            name: "root".to_string(),
+            algorithm: MonkeyAlgorithm::Multiply("humn".to_string(), "aaaa".to_string()),
+        };
+        let all_monkeys: HashMap<String, Monkey> = vec![
+            (left.name.clone(), left),
+            (right.name.clone(), right),
+            (root.name.clone(), root.clone()),
+        ]
+        .into_iter()
+        .collect();
+
+        let equal_value = root.find_value_to_make_equal(100, &all_monkeys);
+
+        assert_eq!(equal_value, 10);
+    }
+    #[test]
+    fn divide_equal() {
+        let left = get_human();
+        let right = Monkey {
+            name: "aaaa".to_string(),
+            algorithm: MonkeyAlgorithm::Constant(10),
+        };
+        let root = Monkey {
+            name: "root".to_string(),
+            algorithm: MonkeyAlgorithm::Divide("humn".to_string(), "aaaa".to_string()),
+        };
+        let all_monkeys: HashMap<String, Monkey> = vec![
+            (left.name.clone(), left),
+            (right.name.clone(), right),
+            (root.name.clone(), root.clone()),
+        ]
+        .into_iter()
+        .collect();
+
+        let equal_value = root.find_value_to_make_equal(100, &all_monkeys);
+
+        assert_eq!(equal_value, 1000);
     }
 
     #[test]
