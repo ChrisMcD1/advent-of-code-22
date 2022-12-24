@@ -1,20 +1,111 @@
-use std::{collections::HashMap, str::FromStr};
+use std::{
+    collections::{HashMap, HashSet},
+    str::FromStr,
+};
 
 fn main() {
     println!("Hello, world!");
     let input = include_str!("../input.prod");
-    //    let output = part_1(input);
-    //   println!("Monkey yells {output}");
+    let output = part_1(input);
+    println!("Monkey yells {output}");
     let output = part_2(input);
     println!("Human should yell {output}");
 }
 
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+enum Operator {
+    Add,
+    Subtract,
+    Multiply,
+    Divide,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+struct MathEquation {
+    left: String,
+    right: String,
+    operator: Operator,
+}
+
+impl MathEquation {
+    fn new(left: String, right: String, operator: Operator) -> Self {
+        return Self {
+            left,
+            right,
+            operator,
+        };
+    }
+    fn get_value(&self, all_monkeys: &HashMap<String, Monkey>) -> i64 {
+        let left_value = all_monkeys.get(&self.left).unwrap().get_value(all_monkeys);
+        let right_value = all_monkeys.get(&self.right).unwrap().get_value(all_monkeys);
+        return match self.operator {
+            Operator::Add => left_value + right_value,
+            Operator::Subtract => left_value - right_value,
+            Operator::Multiply => left_value * right_value,
+            Operator::Divide => left_value / right_value,
+        };
+    }
+    fn get_optional_value(&self, all_monkeys: &HashMap<String, Monkey>) -> Option<i64> {
+        let left_value = all_monkeys
+            .get(&self.left)
+            .unwrap()
+            .get_optional_value(all_monkeys)?;
+        let right_value = all_monkeys
+            .get(&self.right)
+            .unwrap()
+            .get_optional_value(all_monkeys)?;
+        return Some(match self.operator {
+            Operator::Subtract => left_value - right_value,
+            Operator::Add => left_value + right_value,
+            Operator::Multiply => left_value * right_value,
+            Operator::Divide => left_value / right_value,
+        });
+    }
+    fn find_value_to_make_equal(
+        &self,
+        target_value: i64,
+        all_monkeys: &HashMap<String, Monkey>,
+    ) -> i64 {
+        let left_monkey_value = all_monkeys
+            .get(&self.left)
+            .unwrap()
+            .get_optional_value(all_monkeys);
+        let right_monkey_value = all_monkeys
+            .get(&self.right)
+            .unwrap()
+            .get_optional_value(all_monkeys);
+
+        if let Some(left_concrete) = left_monkey_value {
+            let new_target = match self.operator {
+                Operator::Add => target_value - left_concrete,
+                Operator::Subtract => -1 * (target_value - left_concrete),
+                Operator::Multiply => target_value / left_concrete,
+                Operator::Divide => left_concrete / target_value,
+            };
+            return all_monkeys
+                .get(&self.right)
+                .unwrap()
+                .find_value_to_make_equal(new_target, all_monkeys);
+        } else if let Some(right_concrete) = right_monkey_value {
+            let new_target = match self.operator {
+                Operator::Add => target_value - right_concrete,
+                Operator::Subtract => target_value + right_concrete,
+                Operator::Multiply => target_value / right_concrete,
+                Operator::Divide => target_value * right_concrete,
+            };
+            return all_monkeys
+                .get(&self.left)
+                .unwrap()
+                .find_value_to_make_equal(new_target, all_monkeys);
+        } else {
+            unreachable!()
+        }
+    }
+}
+
 #[derive(Debug, PartialEq, Hash, Eq, Clone)]
 enum MonkeyAlgorithm {
-    Add(String, String),
-    Multiply(String, String),
-    Divide(String, String),
-    Subtract(String, String),
+    Equation(MathEquation),
     Constant(i64),
 }
 
@@ -40,22 +131,7 @@ impl Monkey {
     fn get_value(&self, all_monkeys: &HashMap<String, Monkey>) -> i64 {
         return match &self.algorithm {
             MonkeyAlgorithm::Constant(val) => *val,
-            MonkeyAlgorithm::Add(left, right) => {
-                all_monkeys.get(left).unwrap().get_value(all_monkeys)
-                    + all_monkeys.get(right).unwrap().get_value(all_monkeys)
-            }
-            MonkeyAlgorithm::Multiply(left, right) => {
-                all_monkeys.get(left).unwrap().get_value(all_monkeys)
-                    * all_monkeys.get(right).unwrap().get_value(all_monkeys)
-            }
-            MonkeyAlgorithm::Divide(left, right) => {
-                all_monkeys.get(left).unwrap().get_value(all_monkeys)
-                    / all_monkeys.get(right).unwrap().get_value(all_monkeys)
-            }
-            MonkeyAlgorithm::Subtract(left, right) => {
-                all_monkeys.get(left).unwrap().get_value(all_monkeys)
-                    - all_monkeys.get(right).unwrap().get_value(all_monkeys)
-            }
+            MonkeyAlgorithm::Equation(math_equation) => math_equation.get_value(all_monkeys),
         };
     }
     fn get_optional_value(&self, all_monkeys: &HashMap<String, Monkey>) -> Option<i64> {
@@ -64,49 +140,8 @@ impl Monkey {
         }
         return match &self.algorithm {
             MonkeyAlgorithm::Constant(val) => Some(*val),
-            MonkeyAlgorithm::Add(left, right) => {
-                let left_monkey_value = all_monkeys
-                    .get(left)
-                    .unwrap()
-                    .get_optional_value(all_monkeys)?;
-                let right_monkey_value = all_monkeys
-                    .get(right)
-                    .unwrap()
-                    .get_optional_value(all_monkeys)?;
-                Some(left_monkey_value + right_monkey_value)
-            }
-            MonkeyAlgorithm::Subtract(left, right) => {
-                let left_monkey_value = all_monkeys
-                    .get(left)
-                    .unwrap()
-                    .get_optional_value(all_monkeys)?;
-                let right_monkey_value = all_monkeys
-                    .get(right)
-                    .unwrap()
-                    .get_optional_value(all_monkeys)?;
-                Some(left_monkey_value - right_monkey_value)
-            }
-            MonkeyAlgorithm::Multiply(left, right) => {
-                let left_monkey_value = all_monkeys
-                    .get(left)
-                    .unwrap()
-                    .get_optional_value(all_monkeys)?;
-                let right_monkey_value = all_monkeys
-                    .get(right)
-                    .unwrap()
-                    .get_optional_value(all_monkeys)?;
-                Some(left_monkey_value * right_monkey_value)
-            }
-            MonkeyAlgorithm::Divide(left, right) => {
-                let left_monkey_value = all_monkeys
-                    .get(left)
-                    .unwrap()
-                    .get_optional_value(all_monkeys)?;
-                let right_monkey_value = all_monkeys
-                    .get(right)
-                    .unwrap()
-                    .get_optional_value(all_monkeys)?;
-                Some(left_monkey_value / right_monkey_value)
+            MonkeyAlgorithm::Equation(math_equation) => {
+                math_equation.get_optional_value(all_monkeys)
             }
         };
     }
@@ -119,109 +154,8 @@ impl Monkey {
             return target_value;
         }
         match &self.algorithm {
-            MonkeyAlgorithm::Add(left, right) => {
-                let left_monkey_value = all_monkeys
-                    .get(left)
-                    .unwrap()
-                    .get_optional_value(all_monkeys);
-                let right_monkey_value = all_monkeys
-                    .get(right)
-                    .unwrap()
-                    .get_optional_value(all_monkeys);
-
-                if let Some(left_concrete) = left_monkey_value {
-                    let new_target = target_value - left_concrete;
-                    return all_monkeys
-                        .get(right)
-                        .unwrap()
-                        .find_value_to_make_equal(new_target, all_monkeys);
-                } else if let Some(right_concrete) = right_monkey_value {
-                    let new_target = target_value - right_concrete;
-                    return all_monkeys
-                        .get(left)
-                        .unwrap()
-                        .find_value_to_make_equal(new_target, all_monkeys);
-                } else {
-                    unreachable!()
-                }
-            }
-            MonkeyAlgorithm::Subtract(left, right) => {
-                let left_monkey_value = all_monkeys
-                    .get(left)
-                    .unwrap()
-                    .get_optional_value(all_monkeys);
-                let right_monkey_value = all_monkeys
-                    .get(right)
-                    .unwrap()
-                    .get_optional_value(all_monkeys);
-
-                if let Some(left_concrete) = left_monkey_value {
-                    let new_target = -1 * (target_value - left_concrete);
-                    return all_monkeys
-                        .get(right)
-                        .unwrap()
-                        .find_value_to_make_equal(new_target, all_monkeys);
-                } else if let Some(right_concrete) = right_monkey_value {
-                    let new_target = target_value + right_concrete;
-                    return all_monkeys
-                        .get(left)
-                        .unwrap()
-                        .find_value_to_make_equal(new_target, all_monkeys);
-                } else {
-                    unreachable!()
-                }
-            }
-            MonkeyAlgorithm::Multiply(left, right) => {
-                let left_monkey_value = all_monkeys
-                    .get(left)
-                    .unwrap()
-                    .get_optional_value(all_monkeys);
-                let right_monkey_value = all_monkeys
-                    .get(right)
-                    .unwrap()
-                    .get_optional_value(all_monkeys);
-
-                if let Some(left_concrete) = left_monkey_value {
-                    let new_target = target_value / left_concrete;
-                    return all_monkeys
-                        .get(right)
-                        .unwrap()
-                        .find_value_to_make_equal(new_target, all_monkeys);
-                } else if let Some(right_concrete) = right_monkey_value {
-                    let new_target = target_value / right_concrete;
-                    return all_monkeys
-                        .get(left)
-                        .unwrap()
-                        .find_value_to_make_equal(new_target, all_monkeys);
-                } else {
-                    unreachable!()
-                }
-            }
-            MonkeyAlgorithm::Divide(left, right) => {
-                let left_monkey_value = all_monkeys
-                    .get(left)
-                    .unwrap()
-                    .get_optional_value(all_monkeys);
-                let right_monkey_value = all_monkeys
-                    .get(right)
-                    .unwrap()
-                    .get_optional_value(all_monkeys);
-
-                if let Some(left_concrete) = left_monkey_value {
-                    let new_target = left_concrete / target_value;
-                    return all_monkeys
-                        .get(right)
-                        .unwrap()
-                        .find_value_to_make_equal(new_target, all_monkeys);
-                } else if let Some(right_concrete) = right_monkey_value {
-                    let new_target = target_value * right_concrete;
-                    return all_monkeys
-                        .get(left)
-                        .unwrap()
-                        .find_value_to_make_equal(new_target, all_monkeys);
-                } else {
-                    unreachable!()
-                }
+            MonkeyAlgorithm::Equation(math_equation) => {
+                math_equation.find_value_to_make_equal(target_value, all_monkeys)
             }
             MonkeyAlgorithm::Constant(val) => *val,
         }
@@ -241,28 +175,32 @@ impl FromStr for MonkeyAlgorithm {
             let right_monkey = words[2];
             match operation {
                 "+" => {
-                    return Ok(MonkeyAlgorithm::Add(
+                    return Ok(MonkeyAlgorithm::Equation(MathEquation::new(
                         left_monkey.to_string(),
                         right_monkey.to_string(),
-                    ))
+                        Operator::Add,
+                    )))
                 }
                 "-" => {
-                    return Ok(MonkeyAlgorithm::Subtract(
+                    return Ok(MonkeyAlgorithm::Equation(MathEquation::new(
                         left_monkey.to_string(),
                         right_monkey.to_string(),
-                    ))
+                        Operator::Subtract,
+                    )))
                 }
                 "*" => {
-                    return Ok(MonkeyAlgorithm::Multiply(
+                    return Ok(MonkeyAlgorithm::Equation(MathEquation::new(
                         left_monkey.to_string(),
                         right_monkey.to_string(),
-                    ))
+                        Operator::Multiply,
+                    )))
                 }
                 "/" => {
-                    return Ok(MonkeyAlgorithm::Divide(
+                    return Ok(MonkeyAlgorithm::Equation(MathEquation::new(
                         left_monkey.to_string(),
                         right_monkey.to_string(),
-                    ))
+                        Operator::Divide,
+                    )))
                 }
                 _ => unreachable!(),
             }
@@ -301,9 +239,9 @@ fn part_2(input: &str) -> i64 {
         .find(|&elem| elem.1.name == "root".to_string())
         .unwrap()
         .1;
-    if let MonkeyAlgorithm::Add(left, right) = &root_monkey.algorithm {
-        let left_monkey = monkeys.get(left).unwrap();
-        let right_monkey = monkeys.get(right).unwrap();
+    if let MonkeyAlgorithm::Equation(math_equation) = &root_monkey.algorithm {
+        let left_monkey = monkeys.get(&math_equation.left).unwrap();
+        let right_monkey = monkeys.get(&math_equation.right).unwrap();
         let left_monkey_value = left_monkey.get_optional_value(&monkeys);
         let right_monkey_value = right_monkey.get_optional_value(&monkeys);
         if let Some(left_concrete) = left_monkey_value {
@@ -357,7 +295,11 @@ mod test {
         };
         let root = Monkey {
             name: "root".to_string(),
-            algorithm: MonkeyAlgorithm::Add("humn".to_string(), "aaaa".to_string()),
+            algorithm: MonkeyAlgorithm::Equation(MathEquation::new(
+                "humn".to_string(),
+                "aaaa".to_string(),
+                Operator::Add,
+            )),
         };
         let all_monkeys: HashMap<String, Monkey> = vec![
             (left.name.clone(), left),
@@ -381,7 +323,11 @@ mod test {
         };
         let root = Monkey {
             name: "root".to_string(),
-            algorithm: MonkeyAlgorithm::Subtract("humn".to_string(), "aaaa".to_string()),
+            algorithm: MonkeyAlgorithm::Equation(MathEquation::new(
+                "humn".to_string(),
+                "aaaa".to_string(),
+                Operator::Subtract,
+            )),
         };
         let all_monkeys: HashMap<String, Monkey> = vec![
             (left.name.clone(), left),
@@ -404,7 +350,11 @@ mod test {
         };
         let root = Monkey {
             name: "root".to_string(),
-            algorithm: MonkeyAlgorithm::Multiply("humn".to_string(), "aaaa".to_string()),
+            algorithm: MonkeyAlgorithm::Equation(MathEquation::new(
+                "humn".to_string(),
+                "aaaa".to_string(),
+                Operator::Multiply,
+            )),
         };
         let all_monkeys: HashMap<String, Monkey> = vec![
             (left.name.clone(), left),
@@ -427,7 +377,11 @@ mod test {
         };
         let root = Monkey {
             name: "root".to_string(),
-            algorithm: MonkeyAlgorithm::Divide("humn".to_string(), "aaaa".to_string()),
+            algorithm: MonkeyAlgorithm::Equation(MathEquation::new(
+                "humn".to_string(),
+                "aaaa".to_string(),
+                Operator::Divide,
+            )),
         };
         let all_monkeys: HashMap<String, Monkey> = vec![
             (left.name.clone(), left),
@@ -453,21 +407,6 @@ mod test {
             Monkey {
                 name: "abcd".to_string(),
                 algorithm: MonkeyAlgorithm::Constant(100)
-            }
-        )
-    }
-
-    #[test]
-    fn monkey_add_parse() {
-        let input = "abcd: aaaa + bbbb";
-
-        let parsed_monkey: Monkey = input.parse().unwrap();
-
-        assert_eq!(
-            parsed_monkey,
-            Monkey {
-                name: "abcd".to_string(),
-                algorithm: MonkeyAlgorithm::Add("aaaa".to_string(), "bbbb".to_string())
             }
         )
     }
