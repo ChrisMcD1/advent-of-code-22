@@ -1,0 +1,11 @@
+
+running 6 tests
+test test::parse_basic_board ... ok
+test test::parse_complex_board ... ok
+test test::starting_position ... ok
+test test::basic_moves ... ok
+test test::real_moves ... ok
+test test::part_1_given ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
