@@ -1,14 +1,14 @@
-use std::{
-    collections::{HashMap, HashSet},
-    str::FromStr,
-};
+use std::time::Instant;
+use std::{collections::HashMap, str::FromStr};
 
 fn main() {
     println!("Hello, world!");
     let input = include_str!("../input.prod");
     let output = part_1(input);
     println!("Monkey yells {output}");
+    let start = Instant::now();
     let output = part_2(input);
+    println!("Part 2 took {:?}", Instant::now() - start);
     println!("Human should yell {output}");
 }
 

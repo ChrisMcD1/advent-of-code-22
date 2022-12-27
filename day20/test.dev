@@ -1,0 +1,373 @@
+
+running 6 tests
+test test::at_beginning ... ok
+test test::at_beginning_wrapped ... ok
+test test::at_end ... ok
+test test::duplicates ... ok
+test test::part_1_dev ... ok
+test test::part_2_dev ... FAILED
+
+failures:
+
+---- test::part_2_dev stdout ----
+Initial is [
+    UniqueNumber {
+        value: 811589153,
+        starting_index: 0,
+    },
+    UniqueNumber {
+        value: 1623178306,
+        starting_index: 1,
+    },
+    UniqueNumber {
+        value: -2434767459,
+        starting_index: 2,
+    },
+    UniqueNumber {
+        value: 2434767459,
+        starting_index: 3,
+    },
+    UniqueNumber {
+        value: -1623178306,
+        starting_index: 4,
+    },
+    UniqueNumber {
+        value: 0,
+        starting_index: 5,
+    },
+    UniqueNumber {
+        value: 3246356612,
+        starting_index: 6,
+    },
+]
+After 0 rounds of mixing: CircularVec {
+    data: [
+        UniqueNumber {
+            value: 2434767459,
+            starting_index: 3,
+        },
+        UniqueNumber {
+            value: 3246356612,
+            starting_index: 6,
+        },
+        UniqueNumber {
+            value: -1623178306,
+            starting_index: 4,
+        },
+        UniqueNumber {
+            value: -2434767459,
+            starting_index: 2,
+        },
+        UniqueNumber {
+            value: 811589153,
+            starting_index: 0,
+        },
+        UniqueNumber {
+            value: 0,
+            starting_index: 5,
+        },
+        UniqueNumber {
+            value: 1623178306,
+            starting_index: 1,
+        },
+    ],
+}
+After 1 rounds of mixing: CircularVec {
+    data: [
+        UniqueNumber {
+            value: -1623178306,
+            starting_index: 4,
+        },
+        UniqueNumber {
+            value: 811589153,
+            starting_index: 0,
+        },
+        UniqueNumber {
+            value: 3246356612,
+            starting_index: 6,
+        },
+        UniqueNumber {
+            value: 0,
+            starting_index: 5,
+        },
+        UniqueNumber {
+            value: 2434767459,
+            starting_index: 3,
+        },
+        UniqueNumber {
+            value: -2434767459,
+            starting_index: 2,
+        },
+        UniqueNumber {
+            value: 1623178306,
+            starting_index: 1,
+        },
+    ],
+}
+After 2 rounds of mixing: CircularVec {
+    data: [
+        UniqueNumber {
+            value: 1623178306,
+            starting_index: 1,
+        },
+        UniqueNumber {
+            value: 2434767459,
+            starting_index: 3,
+        },
+        UniqueNumber {
+            value: 0,
+            starting_index: 5,
+        },
+        UniqueNumber {
+            value: 3246356612,
+            starting_index: 6,
+        },
+        UniqueNumber {
+            value: 811589153,
+            starting_index: 0,
+        },
+        UniqueNumber {
+            value: -1623178306,
+            starting_index: 4,
+        },
+        UniqueNumber {
+            value: -2434767459,
+            starting_index: 2,
+        },
+    ],
+}
+After 3 rounds of mixing: CircularVec {
+    data: [
+        UniqueNumber {
+            value: 1623178306,
+            starting_index: 1,
+        },
+        UniqueNumber {
+            value: 811589153,
+            starting_index: 0,
+        },
+        UniqueNumber {
+            value: 0,
+            starting_index: 5,
+        },
+        UniqueNumber {
+            value: -1623178306,
+            starting_index: 4,
+        },
+        UniqueNumber {
+            value: 2434767459,
+            starting_index: 3,
+        },
+        UniqueNumber {
+            value: 3246356612,
+            starting_index: 6,
+        },
+        UniqueNumber {
+            value: -2434767459,
+            starting_index: 2,
+        },
+    ],
+}
+After 4 rounds of mixing: CircularVec {
+    data: [
+        UniqueNumber {
+            value: -2434767459,
+            starting_index: 2,
+        },
+        UniqueNumber {
+            value: 1623178306,
+            starting_index: 1,
+        },
+        UniqueNumber {
+            value: -1623178306,
+            starting_index: 4,
+        },
+        UniqueNumber {
+            value: 2434767459,
+            starting_index: 3,
+        },
+        UniqueNumber {
+            value: 811589153,
+            starting_index: 0,
+        },
+        UniqueNumber {
+            value: 0,
+            starting_index: 5,
+        },
+        UniqueNumber {
+            value: 3246356612,
+            starting_index: 6,
+        },
+    ],
+}
+After 5 rounds of mixing: CircularVec {
+    data: [
+        UniqueNumber {
+            value: 3246356612,
+            starting_index: 6,
+        },
+        UniqueNumber {
+            value: 1623178306,
+            starting_index: 1,
+        },
+        UniqueNumber {
+            value: -1623178306,
+            starting_index: 4,
+        },
+        UniqueNumber {
+            value: 2434767459,
+            starting_index: 3,
+        },
+        UniqueNumber {
+            value: 0,
+            starting_index: 5,
+        },
+        UniqueNumber {
+            value: 811589153,
+            starting_index: 0,
+        },
+        UniqueNumber {
+            value: -2434767459,
+            starting_index: 2,
+        },
+    ],
+}
+After 6 rounds of mixing: CircularVec {
+    data: [
+        UniqueNumber {
+            value: 3246356612,
+            starting_index: 6,
+        },
+        UniqueNumber {
+            value: 1623178306,
+            starting_index: 1,
+        },
+        UniqueNumber {
+            value: 2434767459,
+            starting_index: 3,
+        },
+        UniqueNumber {
+            value: 811589153,
+            starting_index: 0,
+        },
+        UniqueNumber {
+            value: 0,
+            starting_index: 5,
+        },
+        UniqueNumber {
+            value: -1623178306,
+            starting_index: 4,
+        },
+        UniqueNumber {
+            value: -2434767459,
+            starting_index: 2,
+        },
+    ],
+}
+After 7 rounds of mixing: CircularVec {
+    data: [
+        UniqueNumber {
+            value: 3246356612,
+            starting_index: 6,
+        },
+        UniqueNumber {
+            value: 811589153,
+            starting_index: 0,
+        },
+        UniqueNumber {
+            value: 1623178306,
+            starting_index: 1,
+        },
+        UniqueNumber {
+            value: -1623178306,
+            starting_index: 4,
+        },
+        UniqueNumber {
+            value: 0,
+            starting_index: 5,
+        },
+        UniqueNumber {
+            value: -2434767459,
+            starting_index: 2,
+        },
+        UniqueNumber {
+            value: 2434767459,
+            starting_index: 3,
+        },
+    ],
+}
+After 8 rounds of mixing: CircularVec {
+    data: [
+        UniqueNumber {
+            value: -1623178306,
+            starting_index: 4,
+        },
+        UniqueNumber {
+            value: 1623178306,
+            starting_index: 1,
+        },
+        UniqueNumber {
+            value: 0,
+            starting_index: 5,
+        },
+        UniqueNumber {
+            value: 3246356612,
+            starting_index: 6,
+        },
+        UniqueNumber {
+            value: 811589153,
+            starting_index: 0,
+        },
+        UniqueNumber {
+            value: 2434767459,
+            starting_index: 3,
+        },
+        UniqueNumber {
+            value: -2434767459,
+            starting_index: 2,
+        },
+    ],
+}
+After 9 rounds of mixing: CircularVec {
+    data: [
+        UniqueNumber {
+            value: 3246356612,
+            starting_index: 6,
+        },
+        UniqueNumber {
+            value: 1623178306,
+            starting_index: 1,
+        },
+        UniqueNumber {
+            value: 0,
+            starting_index: 5,
+        },
+        UniqueNumber {
+            value: 2434767459,
+            starting_index: 3,
+        },
+        UniqueNumber {
+            value: -1623178306,
+            starting_index: 4,
+        },
+        UniqueNumber {
+            value: -2434767459,
+            starting_index: 2,
+        },
+        UniqueNumber {
+            value: 811589153,
+            starting_index: 0,
+        },
+    ],
+}
+thread 'test::part_2_dev' panicked at 'assertion failed: `(left == right)`
+  left: `5681124071`,
+ right: `1623178306`', src/main.rs:138:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    test::part_2_dev
+
+test result: FAILED. 5 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
