@@ -3,8 +3,8 @@ use std::cmp::Ordering;
 
 fn main() {
     println!("Hello, world!");
-    let input = include_str!("../input.prod");
-    let output = part_2(input);
+    let input = include_str!("../kate.input");
+    let output = part_1(input);
     println!("output: {output}");
 }
 
@@ -103,7 +103,7 @@ fn vec_in_order(left: &Vec<Value>, right: &Vec<Value>) -> Ordering {
 }
 
 fn part_1(input: &str) -> usize {
-    input
+    let in_order: Vec<usize> = input
         .split("\n\n")
         .map(|double_line| double_line.lines().collect::<Vec<&str>>())
         .map(|line_pair| {
@@ -118,7 +118,9 @@ fn part_1(input: &str) -> usize {
             in_order.is_lt()
         })
         .map(|tuple| tuple.0 + 1)
-        .sum()
+        .collect();
+    println!("IN ORDER: {in_order:#?}");
+    in_order.iter().sum()
 }
 
 fn part_2(input: &str) -> usize {

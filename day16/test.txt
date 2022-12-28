@@ -1,0 +1,12 @@
+
+running 11 tests
+test test::part_1_full ... ignored
+test test::meaningful_graph_alternate_path ... ok
+test test::meaningful_graph_basic ... ok
+test test::meaningful_graph_intermediate_node ... ok
+test test::valve_key_parse_3_char ... ok
+test test::parse_tunnels ... ok
+test test::parse_tunnel ... ok
+test test::valve_key_parse ... ok
+test test::parse_flow_rate ... ok
+test test::part_1_given ... ok

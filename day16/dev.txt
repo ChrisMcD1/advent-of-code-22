@@ -1,0 +1,644 @@
+
+running 11 tests
+test test::part_1_full ... ignored
+test test::meaningful_graph_basic ... ok
+test test::meaningful_graph_alternate_path ... ok
+test test::meaningful_graph_intermediate_node ... ok
+test test::parse_tunnel ... ok
+test test::valve_key_parse_3_char ... ok
+test test::parse_flow_rate ... ok
+test test::valve_key_parse ... ok
+test test::parse_tunnels ... ok
+test test::part_1_given ... ok
+test test::part_2_given ... FAILED
+
+failures:
+
+---- test::part_2_given stdout ----
+Generated graph of MeaningfulValveGraph {
+    valves: {
+        "JJ": Valve {
+            key: "JJ",
+            flow_rate: 21,
+            tunnels: {
+                "II",
+            },
+        },
+        "AA": Valve {
+            key: "AA",
+            flow_rate: 0,
+            tunnels: {
+                "II",
+                "DD",
+                "BB",
+            },
+        },
+        "BB": Valve {
+            key: "BB",
+            flow_rate: 13,
+            tunnels: {
+                "CC",
+                "AA",
+            },
+        },
+        "DD": Valve {
+            key: "DD",
+            flow_rate: 20,
+            tunnels: {
+                "EE",
+                "CC",
+                "AA",
+            },
+        },
+        "CC": Valve {
+            key: "CC",
+            flow_rate: 2,
+            tunnels: {
+                "DD",
+                "BB",
+            },
+        },
+        "EE": Valve {
+            key: "EE",
+            flow_rate: 3,
+            tunnels: {
+                "FF",
+                "DD",
+            },
+        },
+        "HH": Valve {
+            key: "HH",
+            flow_rate: 22,
+            tunnels: {
+                "GG",
+            },
+        },
+    },
+    shortest_paths: {
+        "CC": {
+            "BB": 1,
+            "EE": 2,
+            "CC": 0,
+            "DD": 1,
+            "HH": 5,
+            "JJ": 4,
+            "AA": 2,
+        },
+        "EE": {
+            "EE": 0,
+            "AA": 2,
+            "BB": 3,
+            "JJ": 4,
+            "DD": 1,
+            "HH": 3,
+            "CC": 2,
+        },
+        "AA": {
+            "BB": 1,
+            "JJ": 2,
+            "EE": 2,
+            "HH": 5,
+            "AA": 0,
+            "DD": 1,
+            "CC": 2,
+        },
+        "HH": {
+            "HH": 0,
+            "JJ": 7,
+            "BB": 6,
+            "DD": 4,
+            "EE": 3,
+            "CC": 5,
+            "AA": 5,
+        },
+        "DD": {
+            "BB": 2,
+            "AA": 1,
+            "JJ": 3,
+            "CC": 1,
+            "HH": 4,
+            "EE": 1,
+            "DD": 0,
+        },
+        "JJ": {
+            "JJ": 0,
+            "DD": 3,
+            "AA": 2,
+            "BB": 3,
+            "EE": 4,
+            "CC": 4,
+            "HH": 7,
+        },
+        "BB": {
+            "HH": 6,
+            "CC": 1,
+            "BB": 0,
+            "DD": 2,
+            "AA": 1,
+            "JJ": 3,
+            "EE": 3,
+        },
+    },
+}
+Waiting on state gets a better score: GameState {
+    turn: 3,
+    game_length: 26,
+    score: 0,
+    rate: 20,
+    available_valves: {
+        "EE",
+        "HH",
+        "BB",
+        "JJ",
+        "CC",
+    },
+    agents: [
+        Agent {
+            id: 1,
+            wakeup_turn: 3,
+            valve: "DD",
+        },
+        Agent {
+            id: 0,
+            wakeup_turn: 4,
+            valve: "CC",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "DD",
+    },
+}. Score 480
+Waiting on state gets a better score: GameState {
+    turn: 4,
+    game_length: 26,
+    score: 20,
+    rate: 22,
+    available_valves: {
+        "EE",
+        "HH",
+        "BB",
+        "JJ",
+    },
+    agents: [
+        Agent {
+            id: 0,
+            wakeup_turn: 4,
+            valve: "CC",
+        },
+        Agent {
+            id: 1,
+            wakeup_turn: 7,
+            valve: "JJ",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+    },
+}. Score 526
+Waiting on state gets a better score: GameState {
+    turn: 6,
+    game_length: 26,
+    score: 64,
+    rate: 35,
+    available_valves: {
+        "EE",
+        "HH",
+        "JJ",
+    },
+    agents: [
+        Agent {
+            id: 1,
+            wakeup_turn: 7,
+            valve: "JJ",
+        },
+        Agent {
+            id: 0,
+            wakeup_turn: 6,
+            valve: "BB",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+        "BB",
+    },
+}. Score 799
+Waiting on state gets a better score: GameState {
+    turn: 7,
+    game_length: 26,
+    score: 99,
+    rate: 56,
+    available_valves: {
+        "EE",
+        "HH",
+    },
+    agents: [
+        Agent {
+            id: 1,
+            wakeup_turn: 7,
+            valve: "JJ",
+        },
+        Agent {
+            id: 0,
+            wakeup_turn: 13,
+            valve: "HH",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+        "BB",
+        "JJ",
+    },
+}. Score 1219
+Waiting on state gets a better score: GameState {
+    turn: 12,
+    game_length: 26,
+    score: 379,
+    rate: 59,
+    available_valves: {
+        "HH",
+    },
+    agents: [
+        Agent {
+            id: 0,
+            wakeup_turn: 13,
+            valve: "HH",
+        },
+        Agent {
+            id: 1,
+            wakeup_turn: 12,
+            valve: "EE",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+        "BB",
+        "EE",
+        "JJ",
+    },
+}. Score 1264
+Waiting on state gets a better score: GameState {
+    turn: 10,
+    game_length: 26,
+    score: 267,
+    rate: 59,
+    available_valves: {
+        "HH",
+    },
+    agents: [
+        Agent {
+            id: 0,
+            wakeup_turn: 10,
+            valve: "EE",
+        },
+        Agent {
+            id: 1,
+            wakeup_turn: 15,
+            valve: "HH",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+        "BB",
+        "EE",
+        "JJ",
+    },
+}. Score 1270
+Waiting on state gets a better score: GameState {
+    turn: 10,
+    game_length: 26,
+    score: 215,
+    rate: 65,
+    available_valves: {
+        "EE",
+        "BB",
+    },
+    agents: [
+        Agent {
+            id: 0,
+            wakeup_turn: 10,
+            valve: "HH",
+        },
+        Agent {
+            id: 1,
+            wakeup_turn: 11,
+            valve: "BB",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+        "JJ",
+        "HH",
+    },
+}. Score 1320
+Waiting on state gets a better score: GameState {
+    turn: 11,
+    game_length: 26,
+    score: 280,
+    rate: 78,
+    available_valves: {
+        "EE",
+    },
+    agents: [
+        Agent {
+            id: 1,
+            wakeup_turn: 11,
+            valve: "BB",
+        },
+        Agent {
+            id: 0,
+            wakeup_turn: 14,
+            valve: "EE",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+        "BB",
+        "JJ",
+        "HH",
+    },
+}. Score 1528
+Waiting on state gets a better score: GameState {
+    turn: 11,
+    game_length: 26,
+    score: 270,
+    rate: 81,
+    available_valves: {},
+    agents: [
+        Agent {
+            id: 0,
+            wakeup_turn: 11,
+            valve: "HH",
+        },
+        Agent {
+            id: 1,
+            wakeup_turn: 11,
+            valve: "BB",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+        "EE",
+        "BB",
+        "JJ",
+        "HH",
+    },
+}. Score 1566
+Waiting on state gets a better score: GameState {
+    turn: 10,
+    game_length: 26,
+    score: 248,
+    rate: 78,
+    available_valves: {
+        "EE",
+    },
+    agents: [
+        Agent {
+            id: 0,
+            wakeup_turn: 10,
+            valve: "JJ",
+        },
+        Agent {
+            id: 1,
+            wakeup_turn: 12,
+            valve: "EE",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+        "BB",
+        "JJ",
+        "HH",
+    },
+}. Score 1574
+Waiting on state gets a better score: GameState {
+    turn: 11,
+    game_length: 26,
+    score: 358,
+    rate: 78,
+    available_valves: {
+        "EE",
+    },
+    agents: [
+        Agent {
+            id: 1,
+            wakeup_turn: 11,
+            valve: "HH",
+        },
+        Agent {
+            id: 0,
+            wakeup_turn: 12,
+            valve: "EE",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+        "BB",
+        "JJ",
+        "HH",
+    },
+}. Score 1606
+Waiting on state gets a better score: GameState {
+    turn: 12,
+    game_length: 26,
+    score: 432,
+    rate: 79,
+    available_valves: {
+        "CC",
+    },
+    agents: [
+        Agent {
+            id: 0,
+            wakeup_turn: 12,
+            valve: "HH",
+        },
+        Agent {
+            id: 1,
+            wakeup_turn: 13,
+            valve: "CC",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "EE",
+        "DD",
+        "BB",
+        "JJ",
+        "HH",
+    },
+}. Score 1617
+Waiting on state gets a better score: GameState {
+    turn: 11,
+    game_length: 26,
+    score: 377,
+    rate: 78,
+    available_valves: {
+        "EE",
+    },
+    agents: [
+        Agent {
+            id: 1,
+            wakeup_turn: 12,
+            valve: "EE",
+        },
+        Agent {
+            id: 0,
+            wakeup_turn: 11,
+            valve: "BB",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+        "BB",
+        "JJ",
+        "HH",
+    },
+}. Score 1625
+Waiting on state gets a better score: GameState {
+    turn: 8,
+    game_length: 26,
+    score: 184,
+    rate: 76,
+    available_valves: {
+        "EE",
+        "CC",
+    },
+    agents: [
+        Agent {
+            id: 1,
+            wakeup_turn: 8,
+            valve: "HH",
+        },
+        Agent {
+            id: 0,
+            wakeup_turn: 8,
+            valve: "BB",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "DD",
+        "BB",
+        "JJ",
+        "HH",
+    },
+}. Score 1628
+Waiting on state gets a better score: GameState {
+    turn: 10,
+    game_length: 26,
+    score: 336,
+    rate: 78,
+    available_valves: {
+        "EE",
+    },
+    agents: [
+        Agent {
+            id: 0,
+            wakeup_turn: 10,
+            valve: "CC",
+        },
+        Agent {
+            id: 1,
+            wakeup_turn: 12,
+            valve: "EE",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+        "BB",
+        "JJ",
+        "HH",
+    },
+}. Score 1662
+Waiting on state gets a better score: GameState {
+    turn: 12,
+    game_length: 26,
+    score: 488,
+    rate: 79,
+    available_valves: {
+        "CC",
+    },
+    agents: [
+        Agent {
+            id: 0,
+            wakeup_turn: 12,
+            valve: "EE",
+        },
+        Agent {
+            id: 1,
+            wakeup_turn: 14,
+            valve: "CC",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "EE",
+        "DD",
+        "BB",
+        "JJ",
+        "HH",
+    },
+}. Score 1673
+Waiting on state gets a better score: GameState {
+    turn: 12,
+    game_length: 26,
+    score: 490,
+    rate: 81,
+    available_valves: {},
+    agents: [
+        Agent {
+            id: 0,
+            wakeup_turn: 12,
+            valve: "CC",
+        },
+        Agent {
+            id: 1,
+            wakeup_turn: 12,
+            valve: "EE",
+        },
+    ],
+    open_valves: {
+        "AA",
+        "CC",
+        "DD",
+        "BB",
+        "EE",
+        "JJ",
+        "HH",
+    },
+}. Score 1705
+thread 'test::part_2_given' panicked at 'assertion failed: `(left == right)`
+  left: `1705`,
+ right: `1707`', src/main.rs:385:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    test::part_2_given
+
+test result: FAILED. 9 passed; 1 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.48s
+

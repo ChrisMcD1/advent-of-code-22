@@ -1,6 +1,5 @@
 use anyhow::Result;
 use regex::Regex;
-use std::cmp::min;
 use std::collections::{HashMap, HashSet};
 use std::str::FromStr;
 use std::time::Instant;
@@ -9,207 +8,211 @@ fn main() {
     println!("Hello, world!");
     let input = include_str!("../data.prod");
     let start = Instant::now();
-    let output = part_1(input);
+    let output = solve_game(input, 26, 2);
     println!("output: {output} in {:?}", Instant::now() - start);
 }
-const GAME_LENGTH: usize = 30;
-const ELEPHANT_GAME_LENGTH: usize = 24;
 
-fn part_2(input: &str) -> usize {
+fn solve_game(input: &str, game_length: usize, agent_count: usize) -> usize {
     let valves: Vec<Valve> = input.lines().map(|line| line.parse().unwrap()).collect();
     let graph = MeaningfulValveGraph::new(valves);
-    let initial_game_state = ElephantGameState {
-        human_turn: 1,
-        elephant_turn: 1,
-        score: 0,
-        rate: 0,
-        human_valve: "AA".to_string(),
-        elephant_valve: "AA".to_string(),
-        available_valves: graph
-            .valves
-            .clone()
-            .into_iter()
-            .map(|(key, _)| key)
-            .collect(),
-    };
-    let mut future_game_states = vec![initial_game_state];
+    println!("Generated graph of {graph:#?}");
+    let mut future_game_states = vec![GameState::new(&graph, game_length, agent_count)];
     let mut best_score = 0;
-    while let Some(state) = future_game_states.pop() {
-        //        println!("Beginning to evaluate state: {state:?}");
-        // Evaluate sitting here and waiting state
-        let remaining_turns = (ELEPHANT_GAME_LENGTH - state.turn()) + 1;
-        let final_score = state.score + state.rate * remaining_turns;
+    while let Some(mut state) = future_game_states.pop() {
+        let last_turn = state.turn;
+        state.turn = state.calculate_min_turn();
+        state.update_score_since_last_turn(last_turn);
+        state.open_all_active_valves(&graph);
+
+        let final_score = state.score_without_opening_more_valves();
         if final_score > best_score {
+            println!("Found a better end score for: {state:#?}. Score {final_score}");
             best_score = final_score;
         }
 
-        let mut new_states = vec![];
+        let new_states = generate_game_states(&graph, &state);
 
-        if state.turn() == state.human_turn && state.turn() == state.elephant_turn {
-            //Generate alternate states with the new human position and elephant turn
-        } else if state.turn() == state.human_turn {
-            // Just need to create a new state for the human
-            new_states = state
-                .available_valves
+        for new_state in new_states.into_iter() {
+            future_game_states.push(new_state);
+        }
+    }
+
+    best_score
+}
+
+fn generate_game_states(graph: &MeaningfulValveGraph, state: &GameState) -> Vec<GameState> {
+    //println!("Generating for {state:#?}");
+
+    let new_states: Vec<GameState> = state
+        .active_agents()
+        .iter()
+        .flat_map(|agent| {
+            let new_states = state.generate_moves_for_agent(graph, agent);
+
+            let mut other_agents_moved_states: Vec<GameState> = new_states
                 .iter()
-                .map(|valve_key| {
-                    let human_destination = graph.valves.get(valve_key).unwrap();
-                    let mut available_valves = state.available_valves.clone();
-                    available_valves.remove(&human_destination.key);
-                    o
-                    let human_travel_time =
-                        graph.shortest_path(&state.human_valve, &human_destination.key) + 1;
-                    let human_turn = state.human_turn + human_travel_time;
-                    let elephant_travel_time = state.turn() - state.elephant_turn;
-                    let score = if human_turn <= state.elephant_turn {
-                        state.score + state.rate * human_travel_time
-                    } else {
-                        state.score + state.rate * elephant_travel_time
-                    };
-                    let rate = if human_turn < state.elephant_turn {
-                        state.rate + human_destination.flow_rate
-                    } else {
-                        state.rate + 
-                    }
-                    ElephantGameState {
-                        human_turn: human_turn.clone(),
-                        elephant_turn: state.elephant_turn,
-                        score,
-                    }
-                })
-                .collect()
-        } else if state.turn() == state.elephant_turn {
-            // Just need to create a new state for the elephant
-        } else {
-            unreachable!()
-        }
+                .flat_map(|new_state| generate_game_states(graph, &new_state))
+                .collect();
+            for state in new_states.into_iter() {
+                other_agents_moved_states.push(state);
+            }
 
-        let new_states: Vec<ElephantGameState> = state
-            .available_valves
-            .iter()
-            .flat_map(|human_key| {
-                // consider human move first
-                let human_destination = graph.valves.get(human_key).unwrap();
-                let mut available_valves = state.available_valves.clone();
-                available_valves.remove(&human_destination.key);
-                let human_travel_time =
-                    graph.shortest_path(&state.human_valve, &human_destination.key) + 1;
-                let human_turn = state.human_turn + human_travel_time;
-                available_valves
-                    .iter()
-                    .map(|elephant_key| {
-                        let elephant_destination = graph.valves.get(elephant_key).unwrap();
-                        let mut elephant_available_valves = available_valves.clone();
-                        elephant_available_valves.remove(&elephant_destination.key);
-                        let elephant_travel_time = graph
-                            .shortest_path(&state.elephant_valve, &elephant_destination.key)
-                            + 1;
-                        let elephant_turn = state.elephant_turn + elephant_travel_time;
-                        ElephantGameState {
-                            human_turn: human_turn.clone(),
-                            elephant_turn,
-                            score: state.score + state.rate * min(human_turn, elephant_turn),
-                            rate: state.rate + human_destination.flow_rate,
-                            human_valve: human_destination.key.clone(),
-                            elephant_valve: elephant_destination.key.clone(),
-                            available_valves: elephant_available_valves,
-                        }
-                    })
-                    .collect::<Vec<ElephantGameState>>()
-            })
-            .filter(|state| state.turn() <= ELEPHANT_GAME_LENGTH)
-            .collect();
-
-        // When adding a new state for consideration, we set the game state to be that we have
-        // moved there and opened the valve, and we are on the first turn where that state will
-        // give us value
-        for new_state in new_states.into_iter() {
-            future_game_states.push(new_state);
-        }
-    }
-
-    best_score
+            other_agents_moved_states
+        })
+        .collect();
+    //println!("Generated new_states of {new_states:#?}");
+    new_states
+        .into_iter()
+        .filter(|state| !state.any_agents_going_to_same_place())
+        .filter(|state| state.all_agents_moving_if_possible())
+        .collect()
 }
-
-fn part_1(input: &str) -> usize {
-    let valves: Vec<Valve> = input.lines().map(|line| line.parse().unwrap()).collect();
-    let graph = MeaningfulValveGraph::new(valves);
-    let initial_game_state = GameState {
-        turn: 1,
-        score: 0,
-        rate: 0,
-        valve: "AA".to_string(),
-        available_valves: graph
-            .valves
-            .clone()
-            .into_iter()
-            .map(|(key, _)| key)
-            .collect(),
-    };
-    let mut future_game_states = vec![initial_game_state];
-    let mut best_score = 0;
-    while let Some(state) = future_game_states.pop() {
-        //        println!("Beginning to evaluate state: {state:?}");
-        // Evaluate sitting here and waiting state
-        let remaining_turns = (GAME_LENGTH - state.turn) + 1;
-        let final_score = state.score + state.rate * remaining_turns;
-        if final_score > best_score {
-            best_score = final_score;
-        }
-        let new_states: Vec<GameState> = state
-            .available_valves
-            .iter()
-            .map(|key| {
-                let destination = graph.valves.get(key).unwrap();
-                let mut available_valves = state.available_valves.clone();
-                available_valves.remove(&destination.key);
-                let travel_time = graph.shortest_path(&state.valve, &destination.key) + 1;
-                GameState {
-                    turn: state.turn + travel_time,
-                    score: state.score + state.rate * travel_time,
-                    rate: state.rate + destination.flow_rate,
-                    valve: destination.key.clone(),
-                    available_valves,
-                }
-            })
-            .filter(|state| state.turn <= GAME_LENGTH)
-            .collect();
-
-        // When adding a new state for consideration, we set the game state to be that we have
-        // moved there and opened the valve, and we are on the first turn where that state will
-        // give us value
-        for new_state in new_states.into_iter() {
-            future_game_states.push(new_state);
-        }
-    }
-
-    best_score
-}
-
-#[derive(Debug)]
-struct ElephantGameState {
-    human_turn: usize,
-    human_valve: String,
-    elephant_turn: usize,
-    elephant_valve: String,
-    score: usize,
-    rate: usize,
-    available_valves: HashSet<String>,
-}
-
-impl ElephantGameState {
-    fn turn(&self) -> usize {
-        min(self.elephant_turn, self.human_turn)
-    }
-}
-
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct GameState {
     turn: usize,
+    game_length: usize,
     score: usize,
     rate: usize,
-    valve: String,
     available_valves: HashSet<String>,
+    agents: Vec<Agent>,
+    open_valves: HashSet<String>,
+    history: Vec<GameState>,
+}
+
+impl GameState {
+    fn new(graph: &MeaningfulValveGraph, game_length: usize, agent_count: usize) -> Self {
+        GameState {
+            turn: 1,
+            game_length,
+            score: 0,
+            rate: 0,
+            history: vec![],
+            open_valves: HashSet::new(),
+            available_valves: graph
+                .valves
+                .clone()
+                .into_iter()
+                .map(|(key, _)| key)
+                .filter(|key| key != "AA")
+                .collect(),
+            agents: (0..agent_count).map(|id| Agent::new(id)).collect(),
+        }
+    }
+
+    fn all_agents_moving_if_possible(&self) -> bool {
+        let agent_moving_count = self
+            .agents
+            .iter()
+            .filter(|agent| agent.wakeup_turn > self.turn)
+            .count();
+        self.available_valves.len() == agent_moving_count || agent_moving_count == self.agents.len()
+    }
+    fn score_without_opening_more_valves(&self) -> usize {
+        let remaining_turns = (self.game_length - self.turn) + 1;
+        let final_score = self.score + self.rate * remaining_turns;
+        final_score
+    }
+    fn open_all_active_valves(&mut self, graph: &MeaningfulValveGraph) {
+        self.rate = self.rate
+            + self
+                .active_agents()
+                .iter()
+                .filter(|agent| !self.open_valves.contains(&agent.valve))
+                .map(|agent| graph.valves.get(&agent.valve).unwrap().flow_rate)
+                .sum::<usize>();
+
+        for agent in self.active_agents().iter() {
+            self.open_valves.insert(agent.valve.clone());
+        }
+    }
+    fn update_score_since_last_turn(&mut self, last_turn: usize) {
+        self.score = self.score + self.rate * (self.turn - last_turn);
+    }
+    fn calculate_min_turn(&self) -> usize {
+        self.agents
+            .iter()
+            .map(|agent| agent.wakeup_turn)
+            .min()
+            .expect("Agents must be initialized")
+    }
+    fn any_agents_going_to_same_place(&self) -> bool {
+        self.agents.iter().any(|agent| {
+            let mut other_agents = self.agents.iter().filter(|other| *other != agent);
+            other_agents.any(|other| other.valve == agent.valve)
+        })
+    }
+    fn active_agents(&self) -> Vec<Agent> {
+        self.agents
+            .clone()
+            .into_iter()
+            .filter(|agent| agent.wakeup_turn == self.turn)
+            .collect()
+    }
+    fn move_agent_and_generate_new_state(&self, agent: Agent) -> Self {
+        let mut available_valves = self.available_valves.clone();
+        available_valves.remove(&agent.valve);
+
+        let other_agents: Vec<Agent> = self
+            .agents
+            .clone()
+            .into_iter()
+            .filter(|existing_agent| existing_agent.id != agent.id)
+            .collect();
+
+        let mut agents = other_agents.clone();
+        agents.push(agent);
+
+        let mut new_history = self.history.clone();
+        let mut history_object = self.clone();
+        history_object.history = vec![];
+        new_history.push(history_object);
+        let new_state = GameState {
+            turn: self.turn,
+            game_length: self.game_length,
+            score: self.score,
+            rate: self.rate,
+            available_valves,
+            open_valves: self.open_valves.clone(),
+            agents,
+            history: new_history,
+        };
+        new_state
+    }
+    fn generate_moves_for_agent(
+        &self,
+        graph: &MeaningfulValveGraph,
+        agent: &Agent,
+    ) -> Vec<GameState> {
+        let new_states: Vec<GameState> = self
+            .available_valves
+            .iter()
+            .map(|destination_key| {
+                let new_agent = graph.move_agent_to_destination(agent, destination_key);
+
+                self.move_agent_and_generate_new_state(new_agent)
+            })
+            .filter(|state| state.calculate_min_turn() <= state.game_length)
+            .collect();
+
+        new_states
+    }
+}
+
+#[derive(Debug, Clone, PartialEq)]
+struct Agent {
+    id: usize,
+    wakeup_turn: usize,
+    valve: String,
+}
+
+impl Agent {
+    fn new(id: usize) -> Self {
+        Self {
+            id,
+            wakeup_turn: 1,
+            valve: "AA".to_string(),
+        }
+    }
 }
 
 #[derive(PartialEq, Debug)]
@@ -259,6 +262,17 @@ impl MeaningfulValveGraph {
             .expect("Unable to find from")
             .get(to)
             .expect("Unable to find to")
+    }
+    fn move_agent_to_destination(&self, agent: &Agent, destination_key: &String) -> Agent {
+        let destination = self.valves.get(destination_key).unwrap();
+
+        let travel_time = self.shortest_path(&agent.valve, &destination.key) + 1;
+
+        Agent {
+            id: agent.id,
+            wakeup_turn: agent.wakeup_turn + travel_time,
+            valve: destination.key.clone(),
+        }
     }
 }
 
@@ -371,7 +385,7 @@ mod test {
     fn part_1_given() {
         let input = include_str!("../data.test");
 
-        let result = part_1(input);
+        let result = solve_game(input, 30, 1);
 
         assert_eq!(result, 1651);
     }
@@ -380,9 +394,19 @@ mod test {
     fn part_2_given() {
         let input = include_str!("../data.test");
 
-        let result = part_2(input);
+        let result = solve_game(input, 26, 2);
 
         assert_eq!(result, 1707);
+    }
+
+    #[test]
+    #[ignore]
+    fn part_1_full() {
+        let input = include_str!("../data.prod");
+
+        let result = solve_game(input, 30, 1);
+
+        assert_eq!(result, 2253);
     }
 
     #[test]
