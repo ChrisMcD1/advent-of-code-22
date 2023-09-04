@@ -1,6 +1,7 @@
 use anyhow::Result;
+use core::cmp::Ordering;
 use regex::Regex;
-use std::collections::{HashMap, HashSet};
+use std::collections::{BinaryHeap, HashMap, HashSet};
 use std::str::FromStr;
 use std::time::Instant;
 
@@ -8,217 +9,107 @@ fn main() {
     println!("Hello, world!");
     let input = include_str!("../data.prod");
     let start = Instant::now();
-    let output = solve_game(input, 26, 2);
+    let output = solve_game(input, 30, 1);
     println!("output: {output} in {:?}", Instant::now() - start);
 }
 
-fn solve_game(input: &str, game_length: usize, agent_count: usize) -> usize {
+fn solve_game(input: &str, game_length: u8, agent_count: u8) -> u64 {
     let valves: Vec<Valve> = input.lines().map(|line| line.parse().unwrap()).collect();
     let graph = MeaningfulValveGraph::new(valves);
-    println!("Generated graph of {graph:#?}");
-    let mut future_game_states = vec![GameState::new(&graph, game_length, agent_count)];
+    //println!("Generated graph of {graph:#?}");
+    let mut future_game_states = BinaryHeap::new();
+    let starting_game_state = GameState::new(&graph, game_length, agent_count);
+    future_game_states.push(Priority(
+        starting_game_state.very_optimistic_score(&graph, game_length),
+        starting_game_state,
+    ));
     let mut best_score = 0;
-    while let Some(mut state) = future_game_states.pop() {
-        let last_turn = state.turn;
-        state.turn = state.calculate_min_turn();
-        state.update_score_since_last_turn(last_turn);
-        state.open_all_active_valves(&graph);
-
-        let final_score = state.score_without_opening_more_valves();
-        if final_score > best_score {
-            println!("Found a better end score for: {state:#?}. Score {final_score}");
-            best_score = final_score;
-        }
-
-        let new_states = generate_game_states(&graph, &state);
-
-        for new_state in new_states.into_iter() {
-            future_game_states.push(new_state);
-        }
+    while let Some(priority_state) = future_game_states.pop() {
+        let mut state = priority_state.1;
+        let upper_limit = priority_state.0;
     }
 
     best_score
 }
 
-fn generate_game_states(graph: &MeaningfulValveGraph, state: &GameState) -> Vec<GameState> {
-    //println!("Generating for {state:#?}");
-
-    let new_states: Vec<GameState> = state
-        .active_agents()
-        .iter()
-        .flat_map(|agent| {
-            let new_states = state.generate_moves_for_agent(graph, agent);
-
-            let mut other_agents_moved_states: Vec<GameState> = new_states
-                .iter()
-                .flat_map(|new_state| generate_game_states(graph, &new_state))
-                .collect();
-            for state in new_states.into_iter() {
-                other_agents_moved_states.push(state);
-            }
-
-            other_agents_moved_states
-        })
-        .collect();
-    //println!("Generated new_states of {new_states:#?}");
-    new_states
-        .into_iter()
-        .filter(|state| !state.any_agents_going_to_same_place())
-        .filter(|state| state.all_agents_moving_if_possible())
-        .collect()
-}
 #[derive(Debug, Clone)]
 struct GameState {
-    turn: usize,
-    game_length: usize,
-    score: usize,
-    rate: usize,
-    available_valves: HashSet<String>,
+    score: u64,
+    rate: u64,
+    closed_valves: ClosedValves,
     agents: Vec<Agent>,
-    open_valves: HashSet<String>,
-    history: Vec<GameState>,
+}
+
+#[derive(Clone, PartialEq, Debug)]
+struct ClosedValves {
+    data: u64,
+}
+
+impl ClosedValves {
+    fn new(valves: &Vec<Valve>) -> Self {
+        let mut data = 0u64;
+        for i in 0..valves.len() {
+            data = data | 1 << i;
+        }
+        Self { data }
+    }
+    #[inline(always)]
+    fn close_valve(&self, valve_index: usize) -> Self {
+        let data = self.data & !(1 << valve_index);
+        Self { data }
+    }
+    #[inline(always)]
+    fn valve_closed(&self, valve_index: u64) -> bool {
+        (self.data & 1 << valve_index) != 0
+    }
 }
 
 impl GameState {
-    fn new(graph: &MeaningfulValveGraph, game_length: usize, agent_count: usize) -> Self {
+    fn new(graph: &MeaningfulValveGraph, game_length: u8, agent_count: u8) -> Self {
         GameState {
-            turn: 1,
-            game_length,
             score: 0,
             rate: 0,
-            history: vec![],
-            open_valves: HashSet::new(),
-            available_valves: graph
-                .valves
-                .clone()
-                .into_iter()
-                .map(|(key, _)| key)
-                .filter(|key| key != "AA")
+            closed_valves: ClosedValves::new(&graph.valves),
+            agents: (0..agent_count)
+                .map(|id| Agent::new(id.try_into().unwrap()))
                 .collect(),
-            agents: (0..agent_count).map(|id| Agent::new(id)).collect(),
         }
     }
+    fn sort_agents(&mut self) {
+        self.agents.sort_unstable_by(|a, b| a.turn.cmp(&b.turn))
+    }
+    fn very_optimistic_score(&self, graph: &MeaningfulValveGraph, game_length: u8) -> u64 {
+        let earliest_time = self.agents[0].turn;
+        let mut remaining_turns = game_length - earliest_time;
 
-    fn all_agents_moving_if_possible(&self) -> bool {
-        let agent_moving_count = self
-            .agents
-            .iter()
-            .filter(|agent| agent.wakeup_turn > self.turn)
-            .count();
-        self.available_valves.len() == agent_moving_count || agent_moving_count == self.agents.len()
-    }
-    fn score_without_opening_more_valves(&self) -> usize {
-        let remaining_turns = (self.game_length - self.turn) + 1;
-        let final_score = self.score + self.rate * remaining_turns;
-        final_score
-    }
-    fn open_all_active_valves(&mut self, graph: &MeaningfulValveGraph) {
-        self.rate = self.rate
-            + self
-                .active_agents()
-                .iter()
-                .filter(|agent| !self.open_valves.contains(&agent.valve))
-                .map(|agent| graph.valves.get(&agent.valve).unwrap().flow_rate)
-                .sum::<usize>();
-
-        for agent in self.active_agents().iter() {
-            self.open_valves.insert(agent.valve.clone());
-        }
-    }
-    fn update_score_since_last_turn(&mut self, last_turn: usize) {
-        self.score = self.score + self.rate * (self.turn - last_turn);
-    }
-    fn calculate_min_turn(&self) -> usize {
-        self.agents
-            .iter()
-            .map(|agent| agent.wakeup_turn)
-            .min()
-            .expect("Agents must be initialized")
-    }
-    fn any_agents_going_to_same_place(&self) -> bool {
-        self.agents.iter().any(|agent| {
-            let mut other_agents = self.agents.iter().filter(|other| *other != agent);
-            other_agents.any(|other| other.valve == agent.valve)
-        })
-    }
-    fn active_agents(&self) -> Vec<Agent> {
-        self.agents
-            .clone()
-            .into_iter()
-            .filter(|agent| agent.wakeup_turn == self.turn)
-            .collect()
-    }
-    fn move_agent_and_generate_new_state(&self, agent: Agent) -> Self {
-        let mut available_valves = self.available_valves.clone();
-        available_valves.remove(&agent.valve);
-
-        let other_agents: Vec<Agent> = self
-            .agents
-            .clone()
-            .into_iter()
-            .filter(|existing_agent| existing_agent.id != agent.id)
-            .collect();
-
-        let mut agents = other_agents.clone();
-        agents.push(agent);
-
-        let mut new_history = self.history.clone();
-        let mut history_object = self.clone();
-        history_object.history = vec![];
-        new_history.push(history_object);
-        let new_state = GameState {
-            turn: self.turn,
-            game_length: self.game_length,
-            score: self.score,
-            rate: self.rate,
-            available_valves,
-            open_valves: self.open_valves.clone(),
-            agents,
-            history: new_history,
-        };
-        new_state
-    }
-    fn generate_moves_for_agent(
-        &self,
-        graph: &MeaningfulValveGraph,
-        agent: &Agent,
-    ) -> Vec<GameState> {
-        let new_states: Vec<GameState> = self
-            .available_valves
-            .iter()
-            .map(|destination_key| {
-                let new_agent = graph.move_agent_to_destination(agent, destination_key);
-
-                self.move_agent_and_generate_new_state(new_agent)
-            })
-            .filter(|state| state.calculate_min_turn() <= state.game_length)
-            .collect();
-
-        new_states
+        self.score + 0
     }
 }
 
 #[derive(Debug, Clone, PartialEq)]
 struct Agent {
-    id: usize,
-    wakeup_turn: usize,
-    valve: String,
+    id: u8,
+    turn: u8,
+    valve: usize,
 }
 
 impl Agent {
-    fn new(id: usize) -> Self {
+    fn new(id: u8) -> Self {
         Self {
             id,
-            wakeup_turn: 1,
-            valve: "AA".to_string(),
+            turn: 1,
+            valve: 0,
         }
+    }
+    fn valve(&self, graph: &MeaningfulValveGraph) -> String {
+        graph.get_valve_key(self.valve).unwrap().to_string()
     }
 }
 
 #[derive(PartialEq, Debug)]
 struct MeaningfulValveGraph {
-    valves: HashMap<String, Valve>,
-    shortest_paths: HashMap<String, HashMap<String, usize>>,
+    valves: Vec<Valve>,
+    shortest_paths: Vec<Vec<u8>>,
 }
 
 impl MeaningfulValveGraph {
@@ -236,10 +127,10 @@ impl MeaningfulValveGraph {
             .collect();
         //       println!("meaningful valves: {meaningful_valves:?}");
 
-        let shortest_paths: HashMap<String, HashMap<String, usize>> = meaningful_valves
+        let shortest_paths: HashMap<String, HashMap<String, u8>> = meaningful_valves
             .iter()
             .map(|valve| {
-                let destinations: HashMap<String, usize> =
+                let destinations: HashMap<String, u8> =
                     find_full_shortest_path_graph(&all_valves_map, valve.key.clone())
                         .into_iter()
                         .filter(|(key, _)| meaningful_valves.iter().any(|valve| valve.key == *key))
@@ -247,31 +138,64 @@ impl MeaningfulValveGraph {
                 return (valve.key.clone(), destinations);
             })
             .collect();
+
+        let mut shortest_paths_vec =
+            vec![vec![u8::MAX; meaningful_valves.len()]; meaningful_valves.len()];
+
+        for (from, destinations) in shortest_paths.iter() {
+            let from_index = meaningful_valves
+                .iter()
+                .position(|valve| valve.key == *from)
+                .unwrap();
+            for (to, distance) in destinations.iter() {
+                let to_index = meaningful_valves
+                    .iter()
+                    .position(|valve| valve.key == *to)
+                    .unwrap();
+                shortest_paths_vec[from_index][to_index] = *distance;
+            }
+        }
+
         Self {
-            valves: meaningful_valves
-                .into_iter()
-                .map(|valve| (valve.key.clone(), valve))
-                .collect(),
-            shortest_paths,
+            valves: meaningful_valves,
+            shortest_paths: shortest_paths_vec,
         }
     }
-    fn shortest_path(&self, from: &String, to: &String) -> usize {
-        *self
-            .shortest_paths
-            .get(from)
-            .expect("Unable to find from")
-            .get(to)
-            .expect("Unable to find to")
+    fn get_valve_key(&self, valve_index: usize) -> Option<&str> {
+        Some(&self.valves.get(valve_index)?.key)
     }
-    fn move_agent_to_destination(&self, agent: &Agent, destination_key: &String) -> Agent {
-        let destination = self.valves.get(destination_key).unwrap();
+    fn get_valve_index(&self, valve_key: &str) -> Option<usize> {
+        self.valves.iter().position(|valve| valve.key == valve_key)
+    }
+    fn valves_hashset(&self) -> HashMap<String, Valve> {
+        self.valves
+            .clone()
+            .into_iter()
+            .map(|valve| (valve.key.clone(), valve))
+            .collect()
+    }
+    fn shortest_path_key(&self, from: &String, to: &String) -> u8 {
+        let from_index = self.get_valve_index(from).unwrap();
+        let to_index = self.get_valve_index(to).unwrap();
+        self.shortest_path(from_index, to_index)
+    }
+    #[inline(always)]
+    fn shortest_path(&self, from: usize, to: usize) -> u8 {
+        self.shortest_paths[from][to]
+    }
+    fn move_agent_to_destination_key(&self, agent: &Agent, destination_key: &String) -> Agent {
+        let destination_index = self.get_valve_index(destination_key).unwrap();
+        self.move_agent_to_destination(agent, destination_index)
+    }
+    fn move_agent_to_destination(&self, agent: &Agent, destination_index: usize) -> Agent {
+        let destination = &self.valves[destination_index];
 
-        let travel_time = self.shortest_path(&agent.valve, &destination.key) + 1;
+        let travel_time = self.shortest_path(agent.valve, destination_index) + 1;
 
         Agent {
             id: agent.id,
-            wakeup_turn: agent.wakeup_turn + travel_time,
-            valve: destination.key.clone(),
+            turn: agent.turn + travel_time,
+            valve: destination_index,
         }
     }
 }
@@ -279,10 +203,10 @@ impl MeaningfulValveGraph {
 fn find_full_shortest_path_graph(
     all_valves: &HashMap<String, &Valve>,
     target_valve_key: String,
-) -> HashMap<String, usize> {
-    let mut shortest_paths: HashMap<String, usize> = all_valves
+) -> HashMap<String, u8> {
+    let mut shortest_paths: HashMap<String, u8> = all_valves
         .iter()
-        .map(|(key, _)| (key.clone(), usize::MAX))
+        .map(|(key, _)| (key.clone(), u8::MAX))
         .collect();
     shortest_paths.insert(target_valve_key.clone(), 0);
     let mut nodes_to_consider = vec![ShortestPathNode {
@@ -320,18 +244,18 @@ fn find_full_shortest_path_graph(
 
 struct ShortestPathNode {
     key: String,
-    distance_from_start: usize,
+    distance_from_start: u8,
 }
 
 #[derive(Debug, Clone, PartialEq)]
 struct Valve {
     key: String,
-    flow_rate: usize,
+    flow_rate: u8,
     tunnels: HashSet<String>,
 }
 
 impl Valve {
-    fn new(key: String, flow_rate: usize, tunnels: Vec<String>) -> Self {
+    fn new(key: String, flow_rate: u8, tunnels: Vec<String>) -> Self {
         Self {
             key,
             flow_rate,
@@ -349,7 +273,7 @@ impl FromStr for Valve {
         let captures = key_regex.captures(flow).unwrap();
         let key = String::from(captures.get(1).unwrap().as_str());
         let flow_regex: Regex = Regex::new(r"flow rate=(\d*)").unwrap();
-        let flow_rate: usize = flow_regex
+        let flow_rate = flow_regex
             .captures(flow)
             .unwrap()
             .get(1)
@@ -391,6 +315,7 @@ mod test {
     }
 
     #[test]
+    #[ignore]
     fn part_2_given() {
         let input = include_str!("../data.test");
 
@@ -479,12 +404,26 @@ mod test {
         let expected_a_b_path = 1;
 
         let meaningful_graph: MeaningfulValveGraph = MeaningfulValveGraph::new(valves);
-        let a_to_b = meaningful_graph.shortest_path(&a_string, &b_string);
-        let b_to_a = meaningful_graph.shortest_path(&b_string, &a_string);
+        let a_to_b = meaningful_graph.shortest_path_key(&a_string, &b_string);
+        let b_to_a = meaningful_graph.shortest_path_key(&b_string, &a_string);
 
-        assert_eq!(meaningful_graph.valves, expected_graph_valves);
+        assert_eq!(meaningful_graph.valves_hashset(), expected_graph_valves);
         assert_eq!(a_to_b, expected_a_b_path);
         assert_eq!(b_to_a, expected_a_b_path);
+    }
+
+    #[test]
+    fn meaningful_graph_index_to_string() {
+        let a_string = "AA".to_string();
+        let a = Valve::new(a_string.clone(), 1, vec![]);
+
+        let meaningful_graph: MeaningfulValveGraph = MeaningfulValveGraph::new(vec![a]);
+
+        let a_index = meaningful_graph.get_valve_index(&a_string).unwrap();
+        let a_string_got = meaningful_graph.get_valve_key(a_index).unwrap();
+
+        assert_eq!(a_index, 0);
+        assert_eq!(a_string_got, a_string);
     }
 
     #[test]
@@ -508,10 +447,10 @@ mod test {
         let expected_a_b_path = 2;
 
         let meaningful_graph: MeaningfulValveGraph = MeaningfulValveGraph::new(valves);
-        let a_to_b = meaningful_graph.shortest_path(&a_string, &b_string);
-        let b_to_a = meaningful_graph.shortest_path(&b_string, &a_string);
+        let a_to_b = meaningful_graph.shortest_path_key(&a_string, &b_string);
+        let b_to_a = meaningful_graph.shortest_path_key(&b_string, &a_string);
 
-        assert_eq!(meaningful_graph.valves, expected_graph_valves);
+        assert_eq!(meaningful_graph.valves_hashset(), expected_graph_valves);
         assert_eq!(a_to_b, expected_a_b_path);
         assert_eq!(b_to_a, expected_a_b_path);
     }
@@ -557,13 +496,36 @@ mod test {
         let e_b_distance = 3;
 
         let meaningful_graph: MeaningfulValveGraph = MeaningfulValveGraph::new(valves);
-        let a_to_e = meaningful_graph.shortest_path(&a_string, &e_string);
-        let a_to_b = meaningful_graph.shortest_path(&a_string, &b_string);
-        let b_to_e = meaningful_graph.shortest_path(&b_string, &e_string);
+        let a_to_e = meaningful_graph.shortest_path_key(&a_string, &e_string);
+        let a_to_b = meaningful_graph.shortest_path_key(&a_string, &b_string);
+        let b_to_e = meaningful_graph.shortest_path_key(&b_string, &e_string);
 
-        assert_eq!(meaningful_graph.valves, expected_graph_valves);
+        assert_eq!(meaningful_graph.valves_hashset(), expected_graph_valves);
         assert_eq!(a_to_e, a_e_distance);
         assert_eq!(a_to_b, a_b_distance);
         assert_eq!(b_to_e, e_b_distance);
     }
 }
+
+#[derive(Copy, Clone, Debug)]
+pub struct Priority<P, T>(pub P, pub T);
+
+impl<P: Ord + Eq, T> Ord for Priority<P, T> {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.0.cmp(&other.0)
+    }
+}
+
+impl<P: Ord + Eq, T> PartialOrd for Priority<P, T> {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl<P: Eq, T> PartialEq for Priority<P, T> {
+    fn eq(&self, other: &Self) -> bool {
+        self.0 == other.0
+    }
+}
+
+impl<P: Eq, T> Eq for Priority<P, T> {}

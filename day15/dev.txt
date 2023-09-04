@@ -1,0 +1,15 @@
+
+running 10 tests
+test test::parse_coordinate_beacon ... ok
+test test::find_blocked_spaces ... ok
+test test::parse_sensor_data ... ok
+test test::parse_coordinate_sensor ... ok
+test test::part_1_given ... ok
+test test::range_given ... ok
+test test::range_lower_beacon ... ok
+test test::range_no_conflict ... ok
+test test::range_upper_beacon ... ok
+test test::part_2_given ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

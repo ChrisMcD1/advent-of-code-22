@@ -1,0 +1,142 @@
+Hello, world!
+Considering state: GameState { move_number: 0, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 1, position: Coordinate { x: 1, y: 1 } }
+Considering state: GameState { move_number: 2, position: Coordinate { x: 1, y: 2 } }
+Considering state: GameState { move_number: 3, position: Coordinate { x: 1, y: 2 } }
+Considering state: GameState { move_number: 2, position: Coordinate { x: 1, y: 1 } }
+Considering state: GameState { move_number: 3, position: Coordinate { x: 1, y: 2 } }
+Considering state: GameState { move_number: 4, position: Coordinate { x: 1, y: 1 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 2, y: 1 } }
+Considering state: GameState { move_number: 6, position: Coordinate { x: 3, y: 1 } }
+Considering state: GameState { move_number: 7, position: Coordinate { x: 3, y: 2 } }
+Considering state: GameState { move_number: 8, position: Coordinate { x: 2, y: 2 } }
+Considering state: GameState { move_number: 9, position: Coordinate { x: 1, y: 2 } }
+Considering state: GameState { move_number: 9, position: Coordinate { x: 2, y: 1 } }
+Considering state: GameState { move_number: 10, position: Coordinate { x: 3, y: 1 } }
+Considering state: GameState { move_number: 11, position: Coordinate { x: 3, y: 1 } }
+Considering state: GameState { move_number: 12, position: Coordinate { x: 3, y: 2 } }
+Considering state: GameState { move_number: 13, position: Coordinate { x: 3, y: 3 } }
+Considering state: GameState { move_number: 14, position: Coordinate { x: 4, y: 3 } }
+Considering state: GameState { move_number: 15, position: Coordinate { x: 5, y: 3 } }
+Considering state: GameState { move_number: 16, position: Coordinate { x: 6, y: 3 } }
+Considering state: GameState { move_number: 17, position: Coordinate { x: 6, y: 4 } }
+Found a shorter finishing move of 18
+Considering state: GameState { move_number: 18, position: Coordinate { x: 5, y: 4 } }
+Could not make it end in time
+Considering state: GameState { move_number: 14, position: Coordinate { x: 3, y: 4 } }
+Could not make it end in time
+Considering state: GameState { move_number: 16, position: Coordinate { x: 5, y: 2 } }
+Could not make it end in time
+Considering state: GameState { move_number: 15, position: Coordinate { x: 4, y: 2 } }
+Could not make it end in time
+Considering state: GameState { move_number: 13, position: Coordinate { x: 3, y: 2 } }
+Could not make it end in time
+Considering state: GameState { move_number: 12, position: Coordinate { x: 3, y: 1 } }
+Could not make it end in time
+Considering state: GameState { move_number: 13, position: Coordinate { x: 2, y: 2 } }
+Could not make it end in time
+Considering state: GameState { move_number: 10, position: Coordinate { x: 1, y: 1 } }
+Could not make it end in time
+Considering state: GameState { move_number: 10, position: Coordinate { x: 1, y: 1 } }
+Could not make it end in time
+Considering state: GameState { move_number: 4, position: Coordinate { x: 1, y: 1 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 2, y: 1 } }
+Considering state: GameState { move_number: 6, position: Coordinate { x: 3, y: 1 } }
+Considering state: GameState { move_number: 7, position: Coordinate { x: 3, y: 2 } }
+Considering state: GameState { move_number: 8, position: Coordinate { x: 2, y: 2 } }
+Considering state: GameState { move_number: 9, position: Coordinate { x: 1, y: 2 } }
+Could not make it end in time
+Considering state: GameState { move_number: 9, position: Coordinate { x: 2, y: 1 } }
+Could not make it end in time
+Considering state: GameState { move_number: 1, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 2, position: Coordinate { x: 1, y: 1 } }
+Considering state: GameState { move_number: 3, position: Coordinate { x: 1, y: 2 } }
+Considering state: GameState { move_number: 4, position: Coordinate { x: 1, y: 1 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 2, y: 1 } }
+Considering state: GameState { move_number: 6, position: Coordinate { x: 3, y: 1 } }
+Considering state: GameState { move_number: 7, position: Coordinate { x: 3, y: 2 } }
+Considering state: GameState { move_number: 8, position: Coordinate { x: 2, y: 2 } }
+Considering state: GameState { move_number: 9, position: Coordinate { x: 1, y: 2 } }
+Could not make it end in time
+Considering state: GameState { move_number: 9, position: Coordinate { x: 2, y: 1 } }
+Could not make it end in time
+Considering state: GameState { move_number: 2, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 3, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 4, position: Coordinate { x: 1, y: 1 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 2, y: 1 } }
+Considering state: GameState { move_number: 6, position: Coordinate { x: 3, y: 1 } }
+Considering state: GameState { move_number: 7, position: Coordinate { x: 3, y: 2 } }
+Considering state: GameState { move_number: 8, position: Coordinate { x: 2, y: 2 } }
+Considering state: GameState { move_number: 9, position: Coordinate { x: 1, y: 2 } }
+Could not make it end in time
+Considering state: GameState { move_number: 9, position: Coordinate { x: 2, y: 1 } }
+Could not make it end in time
+Considering state: GameState { move_number: 3, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 4, position: Coordinate { x: 1, y: 1 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 2, y: 1 } }
+Considering state: GameState { move_number: 6, position: Coordinate { x: 3, y: 1 } }
+Considering state: GameState { move_number: 7, position: Coordinate { x: 3, y: 2 } }
+Considering state: GameState { move_number: 8, position: Coordinate { x: 2, y: 2 } }
+Considering state: GameState { move_number: 9, position: Coordinate { x: 1, y: 2 } }
+Could not make it end in time
+Considering state: GameState { move_number: 9, position: Coordinate { x: 2, y: 1 } }
+Could not make it end in time
+Considering state: GameState { move_number: 5, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 3, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 4, position: Coordinate { x: 1, y: 1 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 2, y: 1 } }
+Considering state: GameState { move_number: 6, position: Coordinate { x: 3, y: 1 } }
+Considering state: GameState { move_number: 7, position: Coordinate { x: 3, y: 2 } }
+Considering state: GameState { move_number: 8, position: Coordinate { x: 2, y: 2 } }
+Considering state: GameState { move_number: 9, position: Coordinate { x: 1, y: 2 } }
+Could not make it end in time
+Considering state: GameState { move_number: 9, position: Coordinate { x: 2, y: 1 } }
+Could not make it end in time
+Considering state: GameState { move_number: 6, position: Coordinate { x: 1, y: 0 } }
+Could not make it end in time
+Considering state: GameState { move_number: 6, position: Coordinate { x: 1, y: 0 } }
+Could not make it end in time
+Considering state: GameState { move_number: 2, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 4, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 4, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 3, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 4, position: Coordinate { x: 1, y: 1 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 2, y: 1 } }
+Considering state: GameState { move_number: 6, position: Coordinate { x: 3, y: 1 } }
+Considering state: GameState { move_number: 7, position: Coordinate { x: 3, y: 2 } }
+Considering state: GameState { move_number: 8, position: Coordinate { x: 2, y: 2 } }
+Considering state: GameState { move_number: 9, position: Coordinate { x: 1, y: 2 } }
+Could not make it end in time
+Considering state: GameState { move_number: 9, position: Coordinate { x: 2, y: 1 } }
+Could not make it end in time
+Considering state: GameState { move_number: 5, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 4, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 6, position: Coordinate { x: 1, y: 0 } }
+Could not make it end in time
+Considering state: GameState { move_number: 6, position: Coordinate { x: 1, y: 0 } }
+Could not make it end in time
+Considering state: GameState { move_number: 5, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 6, position: Coordinate { x: 1, y: 0 } }
+Could not make it end in time
+Considering state: GameState { move_number: 6, position: Coordinate { x: 1, y: 0 } }
+Could not make it end in time
+Considering state: GameState { move_number: 4, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 6, position: Coordinate { x: 1, y: 0 } }
+Could not make it end in time
+Considering state: GameState { move_number: 5, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 5, position: Coordinate { x: 1, y: 0 } }
+Considering state: GameState { move_number: 6, position: Coordinate { x: 1, y: 0 } }
+Could not make it end in time
+Considering state: GameState { move_number: 6, position: Coordinate { x: 1, y: 0 } }
+Could not make it end in time
+Considering state: GameState { move_number: 6, position: Coordinate { x: 1, y: 0 } }
+Could not make it end in time
+Considering state: GameState { move_number: 6, position: Coordinate { x: 1, y: 0 } }
+Could not make it end in time
+Result is 18, in 583.8µs
