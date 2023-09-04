@@ -1,15 +1,15 @@
 use std::str::FromStr;
-#[derive(Debug, Copy, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct Tree {
     pub height: u32,
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Forest {
     pub trees: Vec<Vec<Tree>>,
 }
 
-#[derive(PartialEq, Clone, Copy, Debug)]
+#[derive(PartialEq, Clone, Copy, Debug, Eq)]
 pub enum ForestParseError {
     NonDigitCharacter,
 }
